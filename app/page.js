@@ -15,8 +15,6 @@ export default async function Home() {
 
     return (
         <main>
-            <NavBar />
-
             <div className="landing-cont flex p-2 h-[100vh] justify-center items-center">
                 <div className="flex-col justify-center w-full lg:w-1/2 md:w-1/2">
                     <p className="p-2 font-black text-[48px]">
