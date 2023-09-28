@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProductCard({ item }) {
     return (
-        <div className="flex flex-col card rounded-md shadow-sm items-center p-2 font-semibold">
-            <div className="flex justify-center h-[150px]">
+        <div className="flex flex-col card rounded-sm shadow font-normal bg-white">
+            <div className="flex h-[150px] bg-gray-100">
                 <Image
                     src={item.thumbnail}
                     height={100}
@@ -15,9 +15,20 @@ export default function ProductCard({ item }) {
                 />
             </div>
 
-            <p>{item.title}</p>
-            <div className="flex w-full text-sm">
-                <p className="p-1">${item.price}</p>
+            <div className="flex-1 p-2">
+                <p className="ml-2 font-medium">{item.title}</p>
+                <p className="text-[#808081] text-xs capitalize ml-2">
+                    by <span className="text-[#323232]">{item.brand}</span>
+                </p>
+            </div>
+
+            <div className="flex w-full text-xl m-1 justify-center items-center">
+                <p className="p-1 text-[#323232] flex-1">${item.price}</p>
+                <p className="text-[#323232] text-base m-2">{item.rating}</p>
+                <FontAwesomeIcon
+                    icon={faStar}
+                    className="text-[#ffb302] h-3 mr-3"
+                />
             </div>
         </div>
     );
