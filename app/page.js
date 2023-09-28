@@ -1,4 +1,4 @@
-import NavBar from "@/app/components/ui/navbar";
+import NavBar from "@/app/components/ui/navbar/navbar";
 import Image from "next/image";
 import img from "../public/img.jpg";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export default async function Home() {
 
     return (
         <main>
-            <div className="landing-cont flex p-2 h-[100vh] justify-center items-center">
+            <div className="landing-cont flex p-2 h-[100vh] justify-center items-center bg-white shadow">
                 <div className="flex-col justify-center w-full lg:w-1/2 md:w-1/2">
                     <p className="p-2 font-black text-[48px]">
                         <span className="text-[#56c1d6]">Welcome</span> to our{" "}
@@ -42,7 +42,7 @@ export default async function Home() {
             <div
                 className="flex-col h-[100vh]"
                 id="products">
-                <h1 className="text-center text-3xl m-2 text-[#284B83] font-bold mb-[72px]">
+                <h1 className="text-center text-3xl m-10 text-[#284B83] font-bold">
                     Categories
                 </h1>
                 <div className="p-2 grid grid-flow-row-dense grid-cols-1 gap-4 md:grid-cols-3 lg:grid-col-3">

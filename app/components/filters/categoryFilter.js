@@ -12,7 +12,7 @@ export default function CategoryFilter({ categoryList, categoryName }) {
     };
 
     return (
-        <div>
+        <div className="w-1/2">
             <select
                 value={categoryName}
                 onChange={handleSelectChange}
