@@ -13,17 +13,18 @@ export default function CategoryFilter({ categoryList, categoryName }) {
 
     return (
         <div>
-            <h1>Dropdown Select Example</h1>
             <select
                 value={categoryName}
-                onChange={handleSelectChange}>
-                <option
-                    value="all"
-                    selected>
-                    all
-                </option>
+                onChange={handleSelectChange}
+                defaultValue="all"
+                className="flex p-1 w-full justify-center items-center">
+                <option value="all">all</option>
                 {categoryList.map((item, index) => (
-                    <option value={item}>{item}</option>
+                    <option
+                        value={item}
+                        key={index}>
+                        {item}
+                    </option>
                 ))}
             </select>
         </div>

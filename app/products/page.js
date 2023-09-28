@@ -26,14 +26,26 @@ export default async function Products(res) {
 
     const categoryList = await getCategories();
     return (
-        <div>
-            <CategoryFilter
-                categoryList={categoryList}
-                categoryName={categoryName}
-            />
-            <div className="p-2 grid grid-flow-row-dense grid-cols-2 gap-4 md:grid-cols-3 lg:grid-col-3">
+        <div className="p-2 flex justify-center">
+            <div className="p-1 w-1/5 justify-center ">
+                <div className="rounded border-[1px] bg-[#fff] mt-1">
+                    <h1 className="font-medium bg-[#00000008] p-3 border-b-[1px]">
+                        Category
+                    </h1>
+                    <div className="p-1">
+                        <CategoryFilter
+                            categoryList={categoryList}
+                            categoryName={categoryName}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="w-4/5 p-2 grid grid-flow-row-dense grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {productsList.map((item, index) => (
-                    <ProductCard item={item} />
+                    <ProductCard
+                        item={item}
+                        key={index}
+                    />
                 ))}
             </div>
         </div>

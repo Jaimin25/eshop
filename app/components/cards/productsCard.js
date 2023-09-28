@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProductCard({ item }) {
     return (
-        <div className="flex flex-col card rounded-md shadow-sm items-center p-2 font-semibold">
+        <div className="flex flex-col card rounded-sm shadow-md items-center p-2 font-semibold bg-white">
             <div className="flex justify-center h-[150px]">
                 <Image
                     src={item.thumbnail}

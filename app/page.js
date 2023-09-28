@@ -47,7 +47,12 @@ export default async function Home() {
                 </h1>
                 <div className="p-2 grid grid-flow-row-dense grid-cols-1 gap-4 md:grid-cols-3 lg:grid-col-3">
                     {categoryList.map((item, index) =>
-                        index < 7 ? <Category categoryName={item} /> : null
+                        index < 7 ? (
+                            <Category
+                                categoryName={item}
+                                key={index}
+                            />
+                        ) : null
                     )}
                 </div>
             </div>
