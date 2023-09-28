@@ -4,21 +4,21 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-export default function RatingFilter({ items }) {
+export default function RatingFilter({ onRatingChange, disabled }) {
     const [rating, setRating] = useState(4);
     function onChange(e) {
         const rating = e.target.value;
         setRating(e.target.value);
-
-        console.log(items.filter((item) => item.rating >= rating));
+        onRatingChange(rating);
     }
     return (
         <div className="p-1 justify-center">
             <input
                 id="default-range"
                 type="range"
-                defaultValue={4}
+                defaultValue={rating}
                 max={5}
+                disabled={disabled}
                 onChange={(e) => onChange(e)}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
             />
