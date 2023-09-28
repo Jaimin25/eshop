@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Dropdown = () => {
@@ -45,20 +46,20 @@ const Dropdown = () => {
                         aria-orientation="vertical"
                         aria-labelledby="options-menu">
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                href="/"
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                 onClick={closeDropdown}>
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                href="/products"
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                 onClick={closeDropdown}>
                                 Products
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a

@@ -11,9 +11,14 @@ async function getImageURLFromProduct(category) {
 
 export default async function Category({ categoryName }) {
     const imgUrl = await getImageURLFromProduct(categoryName);
+
     return (
         <div>
-            <Link href="/">
+            <Link
+                href={{
+                    pathname: "/products",
+                    query: { category: categoryName },
+                }}>
                 <div className="flex p-2 shadow-md flex-col w-auto h-[200px] rounded-sm bg-slate-50 justify-center items-center hover:shadow-lg">
                     <div className="flex justify-center h-[100px]">
                         <Image
