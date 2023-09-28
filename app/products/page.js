@@ -1,8 +1,8 @@
 import Link from "next/link";
 import CategoryFilter from "../components/ui/categoryFilter";
+import ProductCard from "../components/cards/productsCard";
 
 async function getProductsFromCategory(category) {
-    console.log(category);
     const url =
         category === "all" || category === undefined
             ? `https://dummyjson.com/products?limit=0`
@@ -27,11 +27,15 @@ export default async function Products(res) {
     const categoryList = await getCategories();
     return (
         <div>
-            products
-            <CategoryFilter categoryList={categoryList} />
-            {productsList.map((item, index) => (
-                <p>{item.title}</p>
-            ))}
+            <CategoryFilter
+                categoryList={categoryList}
+                categoryName={categoryName}
+            />
+            <div className="p-2 grid grid-flow-row-dense grid-cols-2 gap-4 md:grid-cols-3 lg:grid-col-3">
+                {productsList.map((item, index) => (
+                    <ProductCard item={item} />
+                ))}
+            </div>
         </div>
     );
 }
