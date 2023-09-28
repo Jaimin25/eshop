@@ -2,8 +2,9 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-export default function CategoryFilter({ categoryList }) {
+export default function CategoryFilter({ categoryList, categoryName }) {
     const [selectedOption, setSelectedOption] = useState("");
+
     const router = useRouter();
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value);
@@ -14,13 +15,17 @@ export default function CategoryFilter({ categoryList }) {
         <div>
             <h1>Dropdown Select Example</h1>
             <select
-                value={selectedOption}
+                value={categoryName}
                 onChange={handleSelectChange}>
+                <option
+                    value="all"
+                    selected>
+                    all
+                </option>
                 {categoryList.map((item, index) => (
                     <option value={item}>{item}</option>
                 ))}
             </select>
-            <p>Selected Option: {selectedOption}</p>
         </div>
     );
 }
