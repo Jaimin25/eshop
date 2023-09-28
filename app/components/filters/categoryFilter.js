@@ -2,7 +2,11 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-export default function CategoryFilter({ categoryList, categoryName }) {
+export default function CategoryFilter({
+    categoryList,
+    categoryName,
+    disabled,
+}) {
     const [selectedOption, setSelectedOption] = useState("");
 
     const router = useRouter();
@@ -17,6 +21,7 @@ export default function CategoryFilter({ categoryList, categoryName }) {
                 value={categoryName}
                 onChange={handleSelectChange}
                 defaultValue="all"
+                disabled={disabled}
                 className="flex p-1 w-full justify-center items-center">
                 <option value="all">all</option>
                 {categoryList.map((item, index) => (
