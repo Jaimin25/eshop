@@ -4,7 +4,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-export default function RatingFilter({ onRatingChange, disabled }) {
+export default function RatingFilter({ onRatingChange }) {
     const [rating, setRating] = useState(4);
     function onChange(e) {
         const rating = e.target.value;
@@ -18,7 +18,6 @@ export default function RatingFilter({ onRatingChange, disabled }) {
                 type="range"
                 defaultValue={rating}
                 max={5}
-                disabled={disabled}
                 onChange={(e) => onChange(e)}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
             />

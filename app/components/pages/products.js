@@ -11,6 +11,7 @@ export default function ProductsPage({
     categoryName,
     productsList,
 }) {
+    const [selectedCategory, setSelectedCategory] = useState("all");
     const [selectedRating, setSelectedRating] = useState(null);
     const [selectedPrice, setSelectedPrice] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -27,6 +28,14 @@ export default function ProductsPage({
             filtered = filtered.filter((item) => item.price <= selectedPrice);
         }
 
+        if (selectedCategory) {
+            filtered = filtered.filter(
+                (item) => item.category == selectedCategory
+            );
+            if (selectedCategory == "all") {
+                filtered = productsList;
+            }
+        }
         setLoading(true);
 
         setTimeout(() => {
@@ -37,7 +46,7 @@ export default function ProductsPage({
 
     useEffect(() => {
         filterProducts();
-    }, [selectedRating, selectedPrice]);
+    }, [selectedRating, selectedPrice, selectedCategory]);
 
     return (
         <div className="p-3 flex flex-col lg:flex-row justify-center ">
@@ -50,7 +59,7 @@ export default function ProductsPage({
                         <CategoryFilter
                             categoryList={categoryList}
                             categoryName={categoryName}
-                            disabled={loading}
+                            setSelectedCategory={setSelectedCategory}
                         />
                     </div>
                 </div>
@@ -61,7 +70,6 @@ export default function ProductsPage({
                     <RatingFilter
                         items={productsList}
                         onRatingChange={setSelectedRating}
-                        disabled={loading}
                     />
                 </div>
                 <div className="rounded border-[1px] bg-[#fff] mt-1 justify-center ">
@@ -71,7 +79,6 @@ export default function ProductsPage({
                     <PriceFilter
                         items={productsList}
                         onPriceChange={setSelectedPrice}
-                        disabled={loading}
                     />
                 </div>
             </div>
