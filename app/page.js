@@ -2,7 +2,7 @@ import NavBar from "@/app/components/ui/navbar/navbar";
 import Image from "next/image";
 import img from "../public/img.jpg";
 import Link from "next/link";
-import Category from "./components/cards/category";
+import CategoryCard from "./components/cards/categoryCard";
 
 async function getCategories() {
     const data = await fetch("https://dummyjson.com/products/categories");
@@ -48,7 +48,7 @@ export default async function Home() {
                 <div className="p-2 grid grid-flow-row-dense grid-cols-1 gap-4 md:grid-cols-3 lg:grid-col-3">
                     {categoryList.map((item, index) =>
                         index < 7 ? (
-                            <Category
+                            <CategoryCard
                                 categoryName={item}
                                 key={index}
                             />
