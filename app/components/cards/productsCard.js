@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 export default function ProductCard({ item }) {
-    console.log(item);
-
     return (
         <div className="flex flex-col card rounded-sm shadow font-normal bg-white cursor-pointer">
             <Link
@@ -24,7 +22,11 @@ export default function ProductCard({ item }) {
                 </div>
 
                 <div className="flex-1 p-2">
-                    <p className="ml-2 font-medium">{item.title}</p>
+                    <p className="ml-2 font-medium">
+                        {item.title.length > 15
+                            ? item.title.substring(0, 15) + "..."
+                            : item.title}
+                    </p>
                     <p className="text-[#808081] text-xs capitalize ml-2">
                         by <span className="text-[#323232]">{item.brand}</span>
                     </p>

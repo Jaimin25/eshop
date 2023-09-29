@@ -5,7 +5,6 @@ import ProductCard from "../cards/productsCard";
 import PaginationButton from "../ui/buttons/paginationButtons";
 
 export default function ProductsSection({
-    loading,
     filteredProducts,
     filterProducts,
     selectedCategory,

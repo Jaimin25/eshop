@@ -5,7 +5,7 @@ export default function PaginationButton({
     currentPage,
 }) {
     const focusedButton =
-        value === currentPage ? "bg-[#56c1d6] text-white" : null;
+        value === currentPage ? "bg-[#56c1d6] text-white" : "bg-white";
 
     const prevNextButton =
         value === "Prev"
@@ -17,7 +17,7 @@ export default function PaginationButton({
     const hoverOnButton =
         value === currentPage || disabled ? "" : "hover:bg-[#00000004]";
 
-    const classAttr = `my-1 bg-white border-[1px] p-2 text-sm font-medium ${prevNextButton} h-9 text-center ${focusedButton} ${hoverOnButton}`;
+    const classAttr = `${focusedButton} my-1 border-[1px] p-2 text-sm font-medium ${prevNextButton} h-9 text-center  ${hoverOnButton}`;
 
     return (
         <button

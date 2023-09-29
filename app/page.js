@@ -40,7 +40,7 @@ export default async function Home() {
                 />
             </div>
             <div
-                className="flex-col h-[100vh]"
+                className="flex-col h-auto"
                 id="products">
                 <h1 className="text-center text-3xl m-10 text-[#284B83] font-bold">
                     Categories

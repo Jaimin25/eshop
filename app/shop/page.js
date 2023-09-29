@@ -1,4 +1,5 @@
 import ShopPage from "../components/pages/shop";
+import Loader from "../components/ui/loader";
 
 async function getProducts() {
     const url = `https://dummyjson.com/products?limit=0`;
