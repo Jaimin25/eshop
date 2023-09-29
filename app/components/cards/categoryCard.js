@@ -9,7 +9,7 @@ async function getImageURLFromProduct(category) {
     return data.products[0].thumbnail;
 }
 
-export default async function Category({ categoryName }) {
+export default async function CategoryCard({ categoryName }) {
     const imgUrl = await getImageURLFromProduct(categoryName);
 
     return (
@@ -29,7 +29,7 @@ export default async function Category({ categoryName }) {
                             className="object-contain w-full"
                         />
                     </div>
-                    <h1 className="text-md font-semibold mt-4 text-[#9BBEDC]">
+                    <h1 className="text-md font-semibold mt-4 text-[#323232]">
                         {categoryName.charAt(0).toUpperCase() +
                             categoryName.substring(1, categoryName.length)}
                     </h1>
