@@ -5,6 +5,7 @@ import CategoryFilter from "../filters/categoryFilter";
 import PriceFilter from "../filters/priceFilter";
 import RatingFilter from "../filters/ratingFilter";
 import Loader from "../ui/loader";
+import PaginationSection from "./pagination";
 
 export default function ProductsPage({ categoryList, productsList }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -12,12 +13,6 @@ export default function ProductsPage({ categoryList, productsList }) {
     const [selectedPrice, setSelectedPrice] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [startIndex, setStartIndex] = useState(0);
-    const [endIndex, setEndIndex] = useState(10);
-
-    const totalPages = [...Array(Math.ceil(filteredProducts.length / 10))];
 
     const filterProducts = () => {
         let filtered = [...productsList];
@@ -42,27 +37,9 @@ export default function ProductsPage({ categoryList, productsList }) {
 
         setTimeout(() => {
             setFilteredProducts(filtered);
-            setCurrentPage(0);
-            setStartIndex(0);
-            setEndIndex(10);
             setLoading(false);
         }, 250);
     };
-
-    function handlePageChange(newPage) {
-        setCurrentPage(newPage);
-        setStartIndex(startIndex + 10);
-        setEndIndex(
-            endIndex +
-                (endIndex + 10 > filteredProducts.length
-                    ? filteredProducts.length - endIndex
-                    : 10)
-        );
-    }
-    console.log(startIndex, endIndex);
-    useEffect(() => {
-        filterProducts();
-    }, [selectedRating, selectedPrice, selectedCategory]);
 
     return (
         <div className="p-3 flex flex-col lg:flex-row justify-center ">
@@ -97,49 +74,14 @@ export default function ProductsPage({ categoryList, productsList }) {
                     />
                 </div>
             </div>
-            <div className="flex flex-col md:w-full lg:w-4/5 h-auto justify-center">
-                <div className="bg-[#fff] p-3 text-sm my-2 mx-1 rounded-sm shadow">
-                    Showing: {startIndex + 1}-{endIndex} products of{" "}
-                    {filteredProducts.length}
-                </div>
-                {loading ? (
-                    <div className="flex h-auto w-auto flex-1 items-center justify-center">
-                        <Loader />
-                    </div>
-                ) : filteredProducts.length > 0 ? (
-                    <div className="flex flex-1 flex-col justify-center items-center">
-                        <div className="p-1 w-full h-full grid grid-flow-row-dense grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4">
-                            {filteredProducts
-                                .slice(startIndex, endIndex)
-                                .map((item, index) => (
-                                    <ProductCard
-                                        item={item}
-                                        key={index}
-                                    />
-                                ))}
-                        </div>
-                        {totalPages.length > 1 ? (
-                            <div>
-                                <button className="p-1">Prev</button>
-                                {totalPages.map((item, index) => (
-                                    <button className="p-1">{index + 1}</button>
-                                ))}
-                                <button
-                                    className="p-1"
-                                    onClick={() =>
-                                        handlePageChange(currentPage + 1)
-                                    }>
-                                    Next{" "}
-                                </button>
-                            </div>
-                        ) : null}
-                    </div>
-                ) : (
-                    <div className="h-auto w-auto flex flex-1 items-center justify-center">
-                        <p>No products match the selected filters.</p>
-                    </div>
-                )}
-            </div>
+            <PaginationSection
+                loading={loading}
+                filteredProducts={filteredProducts}
+                filterProducts={filterProducts}
+                selectedCategory={selectedCategory}
+                selectedRating={selectedRating}
+                selectedPrice={selectedPrice}
+            />
         </div>
     );
 }
