@@ -1,7 +1,4 @@
-import {
-    faCartShopping,
-    faShoppingCart,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Dropdown from "./dropdown";
