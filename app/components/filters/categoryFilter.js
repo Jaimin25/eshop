@@ -15,7 +15,6 @@ export default function CategoryFilter({ categoryList, setSelectedCategory }) {
             <select
                 value={selectedOption}
                 onChange={handleSelectChange}
-                defaultValue="all"
                 className="flex p-1 w-full justify-center items-center">
                 <option value="all">all</option>
                 {categoryList.map((item, index) => (

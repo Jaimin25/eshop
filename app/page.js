@@ -27,7 +27,7 @@ export default async function Home() {
                         reprehenderit adipisicing nulla irure. Proident culpa
                         sit nulla esse veniam ea nulla cillum.
                     </p>
-                    <Link href="#products">
+                    <Link href="/shop">
                         <button className="m-2 p-2 w-36 bg-[#284B83] text-white font-semibold rounded-md">
                             Shop now
                         </button>
