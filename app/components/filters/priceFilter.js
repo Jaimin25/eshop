@@ -12,19 +12,16 @@ export default function PriceFilter({ onPriceChange }) {
         onPriceChange(price);
     }
     return (
-        <div className="p-1 justify-center">
+        <div className="p-1 m-1 justify-center">
             <input
                 id="default-range"
-                type="range"
+                type="number"
                 defaultValue={price}
-                max={2000}
-                step={10}
                 onChange={(e) => onChange(e)}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                min="0"
+                max="2000"
+                className="w-full p-1 bg-gray-100 rounded"
             />
-            <div className="flex items-center p-2">
-                <p>$0-${price}</p>
-            </div>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import Loader from "../ui/loader";
 import ProductCard from "../cards/productsCard";
 import PaginationButton from "../ui/buttons/paginationButtons";
 
-export default function PaginationSection({
+export default function ProductsSection({
     loading,
     filteredProducts,
     filterProducts,
@@ -39,16 +39,12 @@ export default function PaginationSection({
     }, [selectedRating, selectedPrice, selectedCategory]);
 
     return (
-        <div className="flex flex-col md:w-full lg:w-4/5 h-auto justify-center">
+        <div className="products flex flex-col md:w-full lg:w-4/5 h-auto justify-center">
             <div className="bg-[#fff] p-3 text-sm my-2 mx-1 rounded-sm shadow">
                 Showing: {startIndex + 1}-{endIndex} products of{" "}
                 {filteredProducts.length}
             </div>
-            {loading ? (
-                <div className="flex h-auto w-auto flex-1 items-center justify-center">
-                    <Loader />
-                </div>
-            ) : filteredProducts.length > 0 ? (
+            {filteredProducts.length > 0 ? (
                 <div className="flex flex-1 flex-col justify-center items-center">
                     <div className="p-1 w-full h-full grid grid-flow-row-dense grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4">
                         {filteredProducts
@@ -61,7 +57,7 @@ export default function PaginationSection({
                             ))}
                     </div>
                     {totalPages.length > 1 ? (
-                        <div>
+                        <div className="mt-3">
                             <PaginationButton
                                 onClick={() =>
                                     handlePageChange(currentPage - 1)
@@ -74,6 +70,7 @@ export default function PaginationSection({
                                 <PaginationButton
                                     key={index}
                                     onClick={() => handlePageChange(index + 1)}
+                                    currentPage={currentPage}
                                     value={index + 1}
                                 />
                             ))}

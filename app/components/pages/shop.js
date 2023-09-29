@@ -4,15 +4,13 @@ import ProductCard from "../cards/productsCard";
 import CategoryFilter from "../filters/categoryFilter";
 import PriceFilter from "../filters/priceFilter";
 import RatingFilter from "../filters/ratingFilter";
-import Loader from "../ui/loader";
-import PaginationSection from "./pagination";
+import ProductsSection from "./pagination";
 
-export default function ProductsPage({ categoryList, productsList }) {
+export default function ShopPage({ categoryList, productsList }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedRating, setSelectedRating] = useState(null);
     const [selectedPrice, setSelectedPrice] = useState(null);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [filteredProducts, setFilteredProducts] = useState(productsList);
 
     const filterProducts = () => {
         let filtered = [...productsList];
@@ -33,12 +31,7 @@ export default function ProductsPage({ categoryList, productsList }) {
             filtered = filtered.filter((item) => item.price <= selectedPrice);
         }
 
-        setLoading(true);
-
-        setTimeout(() => {
-            setFilteredProducts(filtered);
-            setLoading(false);
-        }, 250);
+        setFilteredProducts(filtered);
     };
 
     return (
@@ -74,8 +67,7 @@ export default function ProductsPage({ categoryList, productsList }) {
                     />
                 </div>
             </div>
-            <PaginationSection
-                loading={loading}
+            <ProductsSection
                 filteredProducts={filteredProducts}
                 filterProducts={filterProducts}
                 selectedCategory={selectedCategory}

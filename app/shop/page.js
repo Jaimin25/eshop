@@ -1,10 +1,4 @@
-import Link from "next/link";
-import CategoryFilter from "../components/filters/categoryFilter";
-import ProductCard from "../components/cards/productsCard";
-import RatingFilter from "../components/filters/ratingFilter";
-import Loader from "../components/ui/loader";
-import PriceFilter from "../components/filters/priceFilter";
-import ProductsPage from "../components/pages/products";
+import ShopPage from "../components/pages/shop";
 
 async function getProducts() {
     const url = `https://dummyjson.com/products?limit=0`;
@@ -21,12 +15,12 @@ async function getCategories() {
     return category;
 }
 
-export default async function Products(res) {
+export default async function Shop() {
     const productsList = await getProducts();
 
     const categoryList = await getCategories();
     return (
-        <ProductsPage
+        <ShopPage
             categoryList={categoryList}
             productsList={productsList}
         />
