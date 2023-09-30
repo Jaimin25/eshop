@@ -19,10 +19,9 @@ export default function ProductInfoSection({
 }) {
     return (
         <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center items-center">
-            <div className="img-container h-[400px] w-11/12 md:w-2/5 lg:w-4/12 m-2 p-2 mb-0 pb-0">
+            {loading ? <Loader /> : null}
+            <div className="img-container h-auto w-11/12 md:w-2/5 lg:w-4/12 m-2 p-2 mb-0 pb-0">
                 <div className="h-[300px] flex justify-center shadow p-4 bg-white">
-                    {loading ? <Loader /> : null}
-
                     <Image
                         src={imgUrl}
                         width={300}

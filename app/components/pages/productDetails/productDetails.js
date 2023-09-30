@@ -39,7 +39,7 @@ export default function ProductDetails({ productDetail, imageList }) {
                 shareQuote={shareQuote}
                 setLoading={setLoading}
             />
-            <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center">
+            <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center items-center lg:items-start md:items-start">
                 <Ratings rating={productDetail.rating} />
                 <Review />
             </div>
