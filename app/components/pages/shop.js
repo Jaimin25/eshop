@@ -42,7 +42,7 @@ export default function ShopPage({ categoryList, productsList }) {
 
     return (
         <div className="p-3 flex flex-col lg:flex-row justify-center ">
-            <div className="p-1 lg:w-1/5 md:w-full justify-center ">
+            <div className="p-1 lg:w-1/5 lg:mr-1 md:mr-1 md:w-full justify-center ">
                 <div className="rounded border-[1px] bg-[#fff] mt-1 justify-center ">
                     <h1 className="font-medium bg-[#00000011] p-3 border-b-[1px]">
                         Category

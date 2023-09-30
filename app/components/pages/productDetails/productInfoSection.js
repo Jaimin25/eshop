@@ -1,4 +1,5 @@
-"use client";
+import Image from "next/image";
+import Loader from "../../ui/loader";
 import {
     FacebookIcon,
     FacebookShareButton,
@@ -7,37 +8,20 @@ import {
     WhatsappIcon,
     WhatsappShareButton,
 } from "next-share";
-import { Changa } from "next/font/google";
-import Image from "next/image";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import Loader from "../ui/loader";
-
-export default function ProductDetails({ productDetail, imageList }) {
-    const [loading, setLoading] = useState(true);
-    const [url, setUrl] = useState("");
-    const [imgUrl, setImgUrl] = productDetail.thumbnail
-        ? useState(productDetail.thumbnail)
-        : null;
-    const shareQuote = `I ♥ this product on eShop\n${productDetail.description}\n\n${url}`;
-
-    useEffect(() => {
-        setUrl(window.location.href);
-    }, []);
-
-    function changeImage(url) {
-        if (imgUrl !== url) {
-            setLoading(true);
-            setImgUrl(url);
-        }
-    }
-
+export default function ProductInfoSection({
+    loading,
+    imgUrl,
+    productDetail,
+    imageList,
+    changeImage,
+    shareQuote,
+    setLoading,
+}) {
     return (
         <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center items-center">
-            <div className="img-container h-[400px] w-11/12 md:w-2/5 lg:w-4/12 m-2 p-2 mb-0 pb-0">
+            {loading ? <Loader /> : null}
+            <div className="img-container h-auto w-11/12 md:w-2/5 lg:w-4/12 m-2 p-2 mb-0 pb-0">
                 <div className="h-[300px] flex justify-center shadow p-4 bg-white">
-                    {loading ? <Loader /> : null}
-
                     <Image
                         src={imgUrl}
                         width={300}

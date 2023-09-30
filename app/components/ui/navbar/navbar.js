@@ -5,7 +5,7 @@ import Dropdown from "./dropdown";
 
 export default function NavBar() {
     return (
-        <nav className="flex shadow-md h-[64px] items-center backdrop-blur-sm sticky top-0 bg-white/80">
+        <nav className="flex shadow-md h-[64px] items-center backdrop-blur-sm sticky top-0 z-50 bg-white/80">
             <div className="flex w-full justify-center items-center">
                 <Link
                     href="/"

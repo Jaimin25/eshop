@@ -1,8 +1,10 @@
 import NavBar from "@/app/components/ui/navbar/navbar";
 import Image from "next/image";
 import img from "../public/img.jpg";
+import sale1 from "../public/sale1.jpg";
+import sale3 from "../public/sale3.jpg";
 import Link from "next/link";
-import CategoryCard from "./components/cards/categoryCard";
+import Promo from "./components/pages/promo";
 
 async function getCategories() {
     const data = await fetch("https://dummyjson.com/products/categories");
@@ -15,7 +17,7 @@ export default async function Home() {
 
     return (
         <main>
-            <div className="landing-cont flex p-2 pt-10 h-[100vh] justify-center items-center bg-white shadow">
+            <div className="landing-cont flex p-2 pt-10 h-auto lg:min-h-screen justify-center items-center bg-white shadow">
                 <div className="flex-col justify-center w-full lg:w-1/2 md:w-1/2">
                     <p className="p-2 font-black text-[48px]">
                         <span className="text-[#56c1d6]">Welcome</span> to our{" "}
@@ -40,20 +42,21 @@ export default async function Home() {
                 />
             </div>
             <div
-                className="flex-col h-auto"
+                className="flex flex-col lg:flex-row h-auto w-full p-6 lg:px-[100px] justify-center items-center "
                 id="products">
-                <h1 className="text-center text-3xl m-10 text-[#284B83] font-bold">
-                    Categories
-                </h1>
-                <div className="p-2 grid grid-flow-row-dense grid-cols-1 gap-4 md:grid-cols-3 lg:grid-col-3">
-                    {categoryList.map((item, index) =>
-                        index < 7 ? (
-                            <CategoryCard
-                                categoryName={item}
-                                key={index}
-                            />
-                        ) : null
-                    )}
+                <div className="mt-6 flex h-[22rem] lg:w-5/6 justify-center items-center lg:mr-3">
+                    <Promo />
+                </div>
+
+                <div className="mt-6 lg:mt-6 flex flex-col lg:h-[22rem] lg:w-[192px] justify-center items-center">
+                    <Image
+                        src={sale1}
+                        className="lg:h-44 lg:w-[192px] object-cover lg:object-cover pb-6 lg:pb-2"
+                    />
+                    <Image
+                        src={sale3}
+                        className="lg:h-44 lg:w-[192px] object-cover lg:object-cover lg:pt-2"
+                    />
                 </div>
             </div>
         </main>
