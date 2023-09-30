@@ -8,9 +8,17 @@ import {
     WhatsappShareButton,
 } from "next-share";
 import Image from "next/image";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ProductDetails({ productDetail, imageList }) {
-    const shareQuote = `I ♥ this product on eShop\n${productDetail.description}\n\n${window.location.href}`;
+    const [url, setUrl] = useState("");
+    const shareQuote = `I ♥ this product on eShop\n${productDetail.description}\n\n${url}`;
+    useEffect(() => {
+        setUrl(window.location.href);
+        // You can now use the current URL
+        // ...
+    }, [window.location.href]);
     return (
         <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center items-center">
             <div className="img-container w-11/12 md:w-4/12 lg:w-4/12 m-2 p-2 mb-0 pb-0">
@@ -22,8 +30,10 @@ export default function ProductDetails({ productDetail, imageList }) {
                     className="object-contain w-full"
                 />
                 <div className="flex p-2 justify-center items-center">
-                    {imageList.map((item) => (
-                        <div className="p-1 h-[60px] flex justify-center">
+                    {imageList.map((item, index) => (
+                        <div
+                            key={index}
+                            className="p-1 h-[60px] flex justify-center">
                             <Image
                                 src={item}
                                 width={50}

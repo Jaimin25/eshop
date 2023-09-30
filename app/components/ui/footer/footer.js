@@ -14,7 +14,7 @@ import {
 
 export default function Footer() {
     return (
-        <div className="border-t bg-white h-full pb-6">
+        <div className="border-t bg-white h-full pb-6 mt-6">
             <div className="p-4 flex flex-col md:flex-row lg:flex-row justify-center text-center md:text-left lg:text-left">
                 <div className="about-container mr-4 border-b md:border-r lg:border-r md:border-b-0 lg:border-b-0 p-6">
                     <h1 className=" font-medium text-base mb-3 mx-1">ABOUT</h1>

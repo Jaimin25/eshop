@@ -15,7 +15,7 @@ export default async function Home() {
 
     return (
         <main>
-            <div className="landing-cont flex p-2 h-[100vh] justify-center items-center bg-white shadow">
+            <div className="landing-cont flex p-2 pt-10 h-[100vh] justify-center items-center bg-white shadow">
                 <div className="flex-col justify-center w-full lg:w-1/2 md:w-1/2">
                     <p className="p-2 font-black text-[48px]">
                         <span className="text-[#56c1d6]">Welcome</span> to our{" "}

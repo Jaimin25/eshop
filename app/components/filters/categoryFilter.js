@@ -2,12 +2,17 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-export default function CategoryFilter({ categoryList, setSelectedCategory }) {
-    const [selectedOption, setSelectedOption] = useState("");
+export default function CategoryFilter({
+    categoryList,
+    setSelectedCategory,
+    selected_option,
+}) {
+    const [selectedOption, setSelectedOption] = useState(selected_option);
 
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value);
         setSelectedCategory(event.target.value);
+        localStorage.setItem("category", event.target.value);
     };
 
     return (

@@ -11,7 +11,7 @@ export default function ProductsSection({
     selectedPrice,
     selectedRating,
 }) {
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(5);
     const [startIndex, setStartIndex] = useState(0);
     const [endIndex, setEndIndex] = useState(10);
 
@@ -43,6 +43,7 @@ export default function ProductsSection({
                 Showing: {startIndex + 1}-{endIndex} products of{" "}
                 {filteredProducts.length}
             </div>
+
             {filteredProducts.length > 0 ? (
                 <div className="flex flex-1 flex-col justify-center items-center">
                     <div className="p-1 w-full h-full grid grid-flow-row-dense grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4">

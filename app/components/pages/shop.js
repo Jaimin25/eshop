@@ -7,13 +7,19 @@ import RatingFilter from "../filters/ratingFilter";
 import ProductsSection from "./pagination";
 
 export default function ShopPage({ categoryList, productsList }) {
-    const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedRating, setSelectedRating] = useState(null);
     const [selectedPrice, setSelectedPrice] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState(productsList);
+    const storedCategory =
+        typeof window !== "undefined" && window.localStorage
+            ? localStorage.getItem("category")
+            : null;
+
+    const [selectedCategory, setSelectedCategory] = useState(storedCategory);
 
     const filterProducts = () => {
         let filtered = [...productsList];
+
         if (selectedCategory) {
             filtered = filtered.filter(
                 (item) => item.category == selectedCategory
@@ -45,6 +51,7 @@ export default function ShopPage({ categoryList, productsList }) {
                         <CategoryFilter
                             categoryList={categoryList}
                             setSelectedCategory={setSelectedCategory}
+                            selected_option={storedCategory}
                         />
                     </div>
                 </div>
