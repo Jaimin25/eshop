@@ -1,4 +1,4 @@
-import ProductDetails from "@/app/components/pages/productDetails";
+import ProductDetails from "@/app/components/pages/productDetails/productDetails";
 import Image from "next/image";
 
 async function getProduct(id) {
