@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Loader from "../ui/loader";
 import ProductCard from "../cards/productsCard";
 import PaginationButton from "../ui/buttons/paginationButtons";
 

@@ -7,38 +7,57 @@ import {
     WhatsappIcon,
     WhatsappShareButton,
 } from "next-share";
+import { Changa } from "next/font/google";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Loader from "../ui/loader";
 
 export default function ProductDetails({ productDetail, imageList }) {
+    const [loading, setLoading] = useState(true);
     const [url, setUrl] = useState("");
+    const [imgUrl, setImgUrl] = productDetail.thumbnail
+        ? useState(productDetail.thumbnail)
+        : null;
     const shareQuote = `I ♥ this product on eShop\n${productDetail.description}\n\n${url}`;
+
     useEffect(() => {
         setUrl(window.location.href);
-        // You can now use the current URL
-        // ...
-    }, [window.location.href]);
+    }, []);
+
+    function changeImage(url) {
+        if (imgUrl !== url) {
+            setLoading(true);
+            setImgUrl(url);
+        }
+    }
+
     return (
         <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center items-center">
-            <div className="img-container w-11/12 md:w-4/12 lg:w-4/12 m-2 p-2 mb-0 pb-0">
-                <Image
-                    src={productDetail.thumbnail}
-                    width={300}
-                    height={400}
-                    alt={productDetail.title}
-                    className="object-contain w-full"
-                />
-                <div className="flex p-2 justify-center items-center">
+            <div className="img-container h-[400px] w-11/12 md:w-2/5 lg:w-4/12 m-2 p-2 mb-0 pb-0">
+                <div className="h-[300px] flex justify-center shadow p-4 bg-white">
+                    {loading ? <Loader /> : null}
+
+                    <Image
+                        src={imgUrl}
+                        width={300}
+                        height={400}
+                        alt={productDetail.title}
+                        className="object-contain w-full"
+                        onLoad={() => setLoading(false)}
+                    />
+                </div>
+                <div className="flex p-2 mt-2 justify-center items-center">
                     {imageList.map((item, index) => (
                         <div
                             key={index}
-                            className="p-1 h-[60px] flex justify-center">
+                            className="p-1 m-1 h-[60px] bg-white rounded-sm shadow-sm flex justify-center cursor-pointer hover:shadow-md">
                             <Image
                                 src={item}
                                 width={50}
                                 height={50}
-                                className="object-contain w-full"
+                                onClick={() => changeImage(item)}
+                                className="object-contain w-full cursor-pointer"
                                 alt={item}
                             />
                         </div>
