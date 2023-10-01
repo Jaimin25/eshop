@@ -2,10 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,
+html {
     background-color: #f6f7f8;
     font-family: poppins;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none;
+}
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00000033;
 }
