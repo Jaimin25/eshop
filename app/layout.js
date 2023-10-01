@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Footer from "./components/ui/footer/footer";
 import NavBar from "./components/ui/navbar/navbar";
 import "./globals.css";
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <NavBar />
-                {children}
-                <Footer />
+                <main className="flex flex-col min-h-screen place-content-between">
+                    <NavBar />
+                    <section>{children}</section>
+                    <Footer />
+                </main>
             </body>
         </html>
     );

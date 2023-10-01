@@ -6,15 +6,7 @@ import sale3 from "../public/sale3.jpg";
 import Link from "next/link";
 import Promo from "./components/pages/promo";
 
-async function getCategories() {
-    const data = await fetch("https://dummyjson.com/products/categories");
-    const category = await data.json();
-    return category;
-}
-
-export default async function Home() {
-    const categoryList = await getCategories();
-
+export default function Home() {
     return (
         <main>
             <div className="landing-cont flex p-2 pt-10 h-auto lg:min-h-screen justify-center items-center bg-white shadow">

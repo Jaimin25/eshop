@@ -34,7 +34,7 @@ export default function Review() {
 
                 <Rating
                     className="mx-[2px]"
-                    onChange={(count) => console.log(count)}
+                    onChange={(count) => null}
                 />
                 <p className="p-1 mt-2">Will you recommend this product?</p>
                 <Select

@@ -1,7 +1,13 @@
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+"use client";
+
+import { faCartShopping, faShop } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import Dropdown from "./dropdown";
+import AccountBtn from "./accountBtn";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
+import { Badge } from "@material-tailwind/react";
 
 export default function NavBar() {
     return (
@@ -10,7 +16,7 @@ export default function NavBar() {
                 <Link
                     href="/"
                     className="flex-1">
-                    <div className="flex items-center p-2">
+                    <div className="flex justify-center lg:justify-start md:justify-start items-center p-2">
                         <FontAwesomeIcon
                             className="h-[30px] text-[#56c1d6]"
                             icon={faCartShopping}
@@ -21,16 +27,25 @@ export default function NavBar() {
                         </span>
                     </div>
                 </Link>
-                <ul className="hidden md:flex lg:flex gap-4 p-2 w-full justify-end text-[#284B83] font-semibold">
-                    <li>
-                        <Link href="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link href="/shop">Shop</Link>
-                    </li>
-                    <li>About</li>
+            </div>
+
+            <div className="items-center text-center mr-4">
+                <ul className="flex justify-center items-center gap-2 font-semibold text-center">
+                    <Badge
+                        content="5"
+                        overlap="circular"
+                        color="blue">
+                        <ShoppingBagOutlinedIcon
+                            className="lg:mr-2 md:mr-2"
+                            fontSize="medium"
+                        />
+                    </Badge>
+                    <Link href="/shop">
+                        <li className="hidden lg:flex md:flex">Shop</li>
+                        <StoreOutlinedIcon className="flex lg:hidden md:hidden" />
+                    </Link>
+                    <AccountBtn />
                 </ul>
-                <Dropdown />
             </div>
         </nav>
     );
