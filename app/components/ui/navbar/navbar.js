@@ -30,7 +30,7 @@ export default function NavBar({ user }) {
             </div>
 
             <div className="items-center text-center mr-4">
-                <ul className="flex justify-center items-center gap-2 font-semibold text-center">
+                <div className="flex justify-center items-center gap-2 font-semibold text-center">
                     <Badge
                         content="5"
                         overlap="circular"
@@ -43,11 +43,11 @@ export default function NavBar({ user }) {
                         </Link>
                     </Badge>
                     <Link href="/shop">
-                        <li className="hidden lg:flex md:flex">Shop</li>
+                        <div className="hidden lg:flex md:flex">Shop</div>
                         <StoreOutlinedIcon className="flex lg:hidden md:hidden" />
                     </Link>
                     <AccountBtn user={user} />
-                </ul>
+                </div>
             </div>
         </nav>
     );
