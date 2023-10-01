@@ -23,7 +23,9 @@ export default function AccountBtn({ user }) {
                 <div className="hidden lg:flex md:flex">
                     {user ? user.name : "Hello!"}
                 </div>
-                <AccountCircleOutlinedIcon className="flex visible lg:hidden md:hidden" />
+                <div className="flex lg:hidden md:hidden">
+                    <AccountCircleOutlinedIcon />
+                </div>
             </div>
 
             {isOpen &&
