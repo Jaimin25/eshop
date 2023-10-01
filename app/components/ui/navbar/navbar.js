@@ -44,7 +44,9 @@ export default function NavBar({ user }) {
                     </Badge>
                     <Link href="/shop">
                         <div className="hidden lg:flex md:flex">Shop</div>
-                        <StoreOutlinedIcon className="flex lg:hidden md:hidden" />
+                        <div className="flex lg:hidden md:hidden">
+                            <StoreOutlinedIcon />
+                        </div>
                     </Link>
                     <AccountBtn user={user} />
                 </div>
