@@ -18,9 +18,9 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <main className="flex flex-col min-h-screen place-content-between">
+                <main className="flex flex-col min-h-screen h-full place-content-between">
                     <NavBar />
-                    <section>{children}</section>
+                    {children}
                     <Footer />
                 </main>
             </body>
