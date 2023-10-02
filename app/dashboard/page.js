@@ -24,6 +24,8 @@ export default async function Dashboard() {
 
     userData = await getUserDetails();
     return (
-        <div className="flex justify-center w-full">{userData.username}</div>
+        <div className="flex justify-center w-full">
+            {userData ? userData.username : null}
+        </div>
     );
 }
