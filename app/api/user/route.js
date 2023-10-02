@@ -29,7 +29,7 @@ export async function GET(req) {
             result = { result: error, success: false };
         }
     } else {
-        result = { result: "You don't have acces", success: false };
+        result = { result: "You don't have access!", success: false };
     }
     return NextResponse.json(result);
 }
