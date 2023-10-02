@@ -2,12 +2,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 
 export default async function Dashboard() {
-    const session = await getServerSession(authOptions);
-    const user = session ? session.user : null;
-    const secret = process.env.protection_secret;
     let userData = {};
     const getUserDetails = async (e) => {
         try {
+            const session = await getServerSession(authOptions);
+            const user = session ? session.user : null;
+            const secret = process.env.protection_secret;
             const res = await fetch(
                 `http://localhost:3000//api/user?email=${
                     user.email
