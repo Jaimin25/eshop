@@ -20,11 +20,10 @@ export default function AccountBtn({ user }) {
             <div
                 onClick={toggleDropdown}
                 className="hover:cursor-pointer">
-                {user ? (
-                    <div className="hidden lg:flex md:flex">{user.name}</div>
-                ) : (
-                    <div className="hidden lg:flex md:flex">Hello!</div>
-                )}
+                <div className="hidden lg:flex md:flex">
+                    {user ? user.name : "Hello!"}
+                </div>
+
                 <div className="flex lg:hidden md:hidden">
                     <AccountCircleOutlinedIcon />
                 </div>
