@@ -63,6 +63,16 @@ export default function AccountBtn({ user }) {
                             aria-labelledby="options-menu">
                             <li>
                                 <Link
+                                    href="/dashboard"
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    onClick={() => {
+                                        closeDropdown();
+                                    }}>
+                                    Dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     href="#"
                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     onClick={() => {
