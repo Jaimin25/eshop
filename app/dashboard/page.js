@@ -9,7 +9,7 @@ export default async function Dashboard() {
             const user = session ? session.user : null;
             const secret = process.env.protection_secret;
             const res = await fetch(
-                `http://localhost:3000//api/user?email=${
+                `https://eshop-gilt-tau.vercel.app/api/user?email=${
                     user.email
                 }&secret=${encodeURIComponent(secret)}`
             );
