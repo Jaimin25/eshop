@@ -12,7 +12,11 @@ export async function GET(req) {
     try {
         await mongoose.connect(connectionSrv);
         data = await User.findOne({ email }).select("_id");
-        result = { result: data, success: true };
+        if (data) {
+            result = { result: data, success: true };
+        } else {
+            result = { result: data, success: false };
+        }
     } catch (error) {
         result = { result: error, success: false };
     }

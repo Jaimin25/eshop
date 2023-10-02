@@ -1,3 +1,5 @@
+import { User } from "@/app/lib/model/user";
+import mongoose from "mongoose";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
@@ -8,16 +10,23 @@ export const authOptions = {
                 username: {
                     label: "Username",
                     type: "text",
-                    placeholder: "jsmith",
+                },
+                email: {
+                    label: "Email",
+                    type: "email",
                 },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                const user = { id: 9, name: "cj12", password: "test" };
-
+                await mongoose.connect(connectionSrv);
+                const user = await User.find(credentials.email);
+                const hashedPassword = await bcrypt.hash(
+                    credentials.password,
+                    10
+                );
                 if (
-                    credentials.username === user.name &&
-                    credentials.password === user.password
+                    credentials.email === user.email &&
+                    hashedPassword === user.password
                 ) {
                     return user;
                 } else {
