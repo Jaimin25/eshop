@@ -46,6 +46,9 @@ export const authOptions = {
             },
         }),
     ],
+    session: {
+        strategy: "jwt",
+    },
     callbacks: {
         async session(session, user) {
             await mongoose.connect(connectionSrv);
