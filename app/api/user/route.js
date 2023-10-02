@@ -21,7 +21,7 @@ export async function GET(req) {
                 { email: 1, username: 1, createdAt: 1 }
             );
             if (data) {
-                result = { result: data, success: true };
+                result = { result: { user: data }, success: true };
             } else {
                 result = { result: data, success: false };
             }

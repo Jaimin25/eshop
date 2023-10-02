@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 
-export default function Dashboard() {
+export default async function Dashboard() {
     const secret = process.env.protection_secret;
-
+    let userData = {};
     const getUserDetails = async (e) => {
         const session = await getServerSession(authOptions);
         const user = session ? session.user : null;
@@ -13,10 +13,12 @@ export default function Dashboard() {
             }&secret=${encodeURIComponent(secret)}`
         );
 
-        const userData = await res.json();
-        console.log(userData);
+        userData = await res.json();
+        return userData.result.user;
     };
-    getUserDetails();
 
-    return <div></div>;
+    userData = await getUserDetails();
+    return (
+        <div className="flex justify-center w-full">{userData.username}</div>
+    );
 }
