@@ -15,6 +15,19 @@ export default function LoginForm() {
 
     const handleSubmit = async (e) => {
         try {
+            const checkUserExists = await fetch(
+                `../api/userExists?email=${email}`
+            );
+            const user = await checkUserExists.json();
+
+            if (user.result.provider !== "credentials") {
+                setLoading(false);
+                setError(
+                    `That email is already use in with ${user.result.provider}`
+                );
+                return;
+            }
+
             const res = await signIn("credentials", {
                 email,
                 password,
@@ -30,7 +43,6 @@ export default function LoginForm() {
             router.push("/");
         } catch (error) {
             setLoading(false);
-
             setError(error);
         }
     };

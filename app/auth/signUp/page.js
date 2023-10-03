@@ -1,6 +1,42 @@
+"use client";
 import SignUpForm from "@/app/components/forms/signupForm";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SignUpPage() {
+    const { data: session } = useSession();
+
+    const sessionUser = session ? session.user : null;
+    const router = useRouter();
+
+    useEffect(() => {
+        if (sessionUser) {
+            router.push("/");
+        }
+    }, [sessionUser]);
+
+    const handleSubmit = async (e, provider) => {
+        try {
+            const res = await signIn(provider, {
+                redirect: false,
+            });
+
+            if (res.ok) {
+                console.log("success");
+            }
+            if (res.error) {
+                setError("Invalid credentials!");
+                return;
+            }
+            router.push("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    function continueWithGoogle(e) {
+        handleSubmit(e, "google");
+    }
     return (
         <div className="flex justify-center w-full mt-[32px]">
             <div className="flex flex-col lg:flex-row md:flex-row mx-6 w-full justify-center">
@@ -19,7 +55,9 @@ export default function SignUpPage() {
                         />
                         Continue with GitHub
                     </button>
-                    <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none  disabled:cursor-not-allowed disabled:opacity-60">
+                    <button
+                        className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none  disabled:cursor-not-allowed disabled:opacity-60"
+                        onClick={continueWithGoogle}>
                         <img
                             src="https://www.svgrepo.com/show/475656/google-color.svg"
                             alt="Google"

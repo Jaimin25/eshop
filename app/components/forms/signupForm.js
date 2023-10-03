@@ -9,7 +9,7 @@ export default function SignUpForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
+    const [fullname, setfullname] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
@@ -20,6 +20,7 @@ export default function SignUpForm() {
                 `../api/userExists?email=${email}`
             );
             const user = await checkUserExists.json();
+            const provider = "credentials";
 
             if (user.result !== null) {
                 setLoading(false);
@@ -33,11 +34,13 @@ export default function SignUpForm() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    username,
+                    fullname,
                     email,
                     password,
+                    provider,
                 }),
             });
+
             const result = await res.json();
             if (result.result === "Account created!") {
                 router.push("/auth/signIn");
@@ -53,7 +56,7 @@ export default function SignUpForm() {
     };
 
     function onRegister() {
-        if (!email || !username || !password || !confirmPassword) {
+        if (!email || !fullname || !password || !confirmPassword) {
             setError("All fields are required!");
             return;
         } else {
@@ -76,10 +79,10 @@ export default function SignUpForm() {
             {loading ? <Loader /> : null}
             <p className="text-xl font-semibold">Create An Account</p>
             <Input
-                label="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                error={error && !username ? true : false}
+                label="Fullname"
+                value={fullname}
+                onChange={(e) => setfullname(e.target.value)}
+                error={error && !fullname ? true : false}
             />
             <Input
                 label="Email"

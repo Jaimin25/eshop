@@ -18,7 +18,7 @@ export async function GET(req) {
             await mongoose.connect(connectionSrv);
             data = await User.findOne(
                 { email },
-                { email: 1, username: 1, createdAt: 1 }
+                { email: 1, fullname: 1, provider: 1, createdAt: 1 }
             );
             if (data) {
                 result = { result: { user: data }, success: true };

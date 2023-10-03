@@ -11,9 +11,9 @@ import { Badge } from "@material-tailwind/react";
 
 import { useSession } from "next-auth/react";
 
-export default function NavBar({ user }) {
+export default function NavBar() {
     const { data: session } = useSession();
-    console.log(session);
+
     const sessionUser = session ? session.user : null;
     return (
         <nav className="flex shadow-md h-[64px] items-center backdrop-blur-sm sticky top-0 z-50 bg-white/80">
