@@ -7,11 +7,16 @@ export async function POST(req) {
     let result = {};
 
     try {
-        const { username, email, password } = await req.json();
+        const { fullname, email, password, provider } = await req.json();
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log({ username, email, password });
+        console.log({ fullname, email, password });
         await mongoose.connect(connectionSrv);
-        await User.create({ username, email, password: hashedPassword });
+        await User.create({
+            fullname,
+            email,
+            password: hashedPassword,
+            provider,
+        });
         result = { result: "Account created!", succes: true };
     } catch (error) {
         console.log(error);

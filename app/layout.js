@@ -18,15 +18,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-    const session = await getServerSession(authOptions);
-    const user = session ? session.user : null;
-
     return (
         <html lang="en">
             <body className={poppins.className}>
                 <AuthProvider>
                     <main className="flex flex-col min-h-screen h-full place-content-between">
-                        <NavBar user={user} />
+                        <NavBar />
                         {children}
                         <Footer />
                     </main>

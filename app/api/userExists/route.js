@@ -11,7 +11,8 @@ export async function GET(req) {
     let result = {};
     try {
         await mongoose.connect(connectionSrv);
-        data = await User.findOne({ email });
+        data = await User.findOne({ email }).select("provider");
+
         if (data) {
             result = { result: data, success: true };
         } else {
