@@ -1,37 +1,45 @@
 "use client";
 
+import { base_url } from "@/app/lib/baseUrl";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function AccountDetails() {
-    let userData = {};
+export default function AccountDetails({ secret }) {
+    let [userData, setUserData] = useState([]);
 
     const { data: session } = useSession();
 
     const sessionUser = session ? session.user : null;
 
     useEffect(() => {
-        userData = async (e) => {
-            try {
-                const secret = process.env.protection_secret;
-                const res = await fetch(
-                    `https://eshop-gilt-tau.vercel.app/api/user?email=${
-                        sessionUser.email
-                    }&secret=${encodeURIComponent(secret)}`
-                );
+        getUserDetails();
+    }, [sessionUser]);
 
-                userData = await res.json();
-                return userData.result.user;
-            } catch (error) {
-                console.log(error);
-                return null;
+    const getUserDetails = async (e) => {
+        try {
+            const res = await fetch(
+                `${base_url}/api/user?email=${
+                    sessionUser?.email
+                }&secret=${encodeURIComponent(secret)}`
+            );
+
+            if (res.ok) {
+                const userData = await res.json();
+                setUserData(userData.result.user);
+            } else {
+                console.error("Failed to fetch data:", res.statusText);
             }
-        };
-    }, []);
-    console.log(sessionUser);
+            return;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    };
+
     return (
         <div className="flex justify-center w-full">
-            {userData ? userData.username : null}
+            user
+            {userData ? userData.fullname : null}
         </div>
     );
 }
