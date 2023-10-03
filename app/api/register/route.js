@@ -9,7 +9,7 @@ export async function POST(req) {
     try {
         const { fullname, email, password, provider } = await req.json();
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log({ fullname, email, password });
+
         await mongoose.connect(connectionSrv);
         await User.create({
             fullname,

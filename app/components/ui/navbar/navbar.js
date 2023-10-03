@@ -9,12 +9,14 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 import { Badge } from "@material-tailwind/react";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function NavBar() {
     const { data: session } = useSession();
 
     const sessionUser = session ? session.user : null;
+
     return (
         <nav className="flex shadow-md h-[64px] items-center backdrop-blur-sm sticky top-0 z-50 bg-white/80">
             <div className="flex w-full justify-center items-center">
