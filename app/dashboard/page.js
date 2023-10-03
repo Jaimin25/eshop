@@ -1,31 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
+import AccountDetails from "../components/dashboard/accountDetails";
 
-export default async function Dashboard() {
-    let userData = {};
-    const getUserDetails = async (e) => {
-        try {
-            const session = await getServerSession(authOptions);
-            const user = session ? session.user : null;
-            const secret = process.env.protection_secret;
-            const res = await fetch(
-                `https://eshop-gilt-tau.vercel.app/api/user?email=${
-                    user.email
-                }&secret=${encodeURIComponent(secret)}`
-            );
-
-            userData = await res.json();
-            return userData.result.user;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    };
-
-    userData = await getUserDetails();
+export default function Dashboard() {
     return (
         <div className="flex justify-center w-full">
-            {userData ? userData.username : null}
+            <AccountDetails />
         </div>
     );
 }

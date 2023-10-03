@@ -2,9 +2,10 @@
 
 import { Typography, Input } from "@material-tailwind/react";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../ui/loader";
 import { useRouter } from "next/navigation";
+import { base_url } from "@/app/lib/baseUrl";
 
 export default function LoginForm() {
     const router = useRouter();
@@ -16,9 +17,15 @@ export default function LoginForm() {
     const handleSubmit = async (e) => {
         try {
             const checkUserExists = await fetch(
-                `../api/userExists?email=${email}`
+                `${base_url}/api/userExists?email=${email}`
             );
             const user = await checkUserExists.json();
+
+            if (user.result === null) {
+                setLoading(false);
+                setError(`No account found with that email!`);
+                return;
+            }
 
             if (user.result.provider !== "credentials") {
                 setLoading(false);

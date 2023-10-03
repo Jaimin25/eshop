@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
+import { base_url } from "@/app/lib/baseUrl";
 
 export const authOptions = {
     providers: [
@@ -68,21 +69,18 @@ export const authOptions = {
                     };
 
                     if (!userExists) {
-                        const res = await fetch(
-                            "http://localhost:3000/api/register",
-                            {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    fullname: name,
-                                    email,
-                                    password,
-                                    provider,
-                                }),
-                            }
-                        );
+                        const res = await fetch(`${base_url}/api/register`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                fullname: name,
+                                email,
+                                password,
+                                provider,
+                            }),
+                        });
                         if (res.ok) {
                             return user;
                         } else {

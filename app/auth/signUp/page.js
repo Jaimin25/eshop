@@ -1,5 +1,6 @@
 "use client";
 import SignUpForm from "@/app/components/forms/signupForm";
+import Loader from "@/app/components/ui/loader";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ export default function SignUpPage() {
     const sessionUser = session ? session.user : null;
     const router = useRouter();
 
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         if (sessionUser) {
             router.push("/");
@@ -23,22 +25,30 @@ export default function SignUpPage() {
             });
 
             if (res.ok) {
+                setLoading(false);
+
                 console.log("success");
             }
             if (res.error) {
+                setLoading(false);
+
                 setError("Invalid credentials!");
                 return;
             }
-            router.push("/");
         } catch (error) {
+            setLoading(false);
+
             console.log(error);
         }
     };
     function continueWithGoogle(e) {
+        setLoading(true);
+
         handleSubmit(e, "google");
     }
     return (
         <div className="flex justify-center w-full mt-[32px]">
+            {loading ? <Loader /> : null}
             <div className="flex flex-col lg:flex-row md:flex-row mx-6 w-full justify-center">
                 <SignUpForm />
                 <div className="divider flex lg:flex-col md:flex-col bg-white justify-center items-center px-8 lg:px-4 md:px-4 py-6">

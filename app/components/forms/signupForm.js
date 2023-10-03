@@ -4,6 +4,7 @@ import { useState } from "react";
 import Loader from "../ui/loader";
 import * as EmailValidator from "email-validator";
 import { useRouter } from "next/navigation";
+import { base_url } from "@/app/lib/baseUrl";
 
 export default function SignUpForm() {
     const router = useRouter();
@@ -17,7 +18,7 @@ export default function SignUpForm() {
     const handleSubmit = async (e) => {
         try {
             const checkUserExists = await fetch(
-                `../api/userExists?email=${email}`
+                `${base_url}/api/userExists?email=${email}`
             );
             const user = await checkUserExists.json();
             const provider = "credentials";
@@ -28,7 +29,7 @@ export default function SignUpForm() {
                 return;
             }
 
-            const res = await fetch("../api/register", {
+            const res = await fetch(`${base_url}/api/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
