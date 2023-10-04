@@ -41,7 +41,7 @@ export default function AccountDetails({ secret }) {
         <div className="flex flex-col w-full p-2">
             <p className="text-base font-semibold p-2">Account Details</p>
             <hr className="border-b-1 m-2" />
-            <p className="p-2 text-sm text-[#323232] mt-2">
+            <p className="p-2 text-sm text-[#323232] mt-1">
                 Logged in with {userData ? userData.provider : null}
             </p>
             <div className="flex gap-2 mt-2 text-[#323232]">
