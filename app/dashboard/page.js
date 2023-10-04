@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
-import AccountDetails from "../components/dashboard/accountDetails";
+import AccountDetails from "../components/pages/dashboard/accountDetails";
 
 export default function Dashboard() {
     const secret = process.env.protection_secret;
