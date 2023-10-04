@@ -21,7 +21,7 @@ export default function AccountBtn({ user }) {
                 onClick={toggleDropdown}
                 className="hover:cursor-pointer">
                 <div className="hidden lg:flex md:flex">
-                    {user ? user.name : "Hello!"}
+                    {user ? String(user.name).split(" ")[0] : "Hello!"}
                 </div>
 
                 <div className="flex lg:hidden md:hidden">
