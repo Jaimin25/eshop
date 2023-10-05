@@ -33,3 +33,27 @@ export async function GET(req) {
     }
     return NextResponse.json(result);
 }
+
+export async function PUT(req) {
+    const { fullname, secretKey, userId } = await req.json();
+    const secretCheck = process.env.protection_secret;
+
+    let result = {};
+
+    if (secretCheck === secretKey) {
+        try {
+            await mongoose.connect(connectionSrv);
+            const filter = { _id: userId };
+            const update = { fullname: fullname };
+
+            const doc = await User.findOneAndUpdate(filter, update, {
+                new: true,
+            });
+        } catch (error) {
+            result = { result: error, success: false };
+        }
+    } else {
+        result = { result: "You don't have access!", success: false };
+    }
+    return NextResponse.json(result);
+}
