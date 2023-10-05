@@ -13,6 +13,7 @@ export default function AccountDetails({ secret }) {
 
     const sessionUser = session ? session.user : null;
 
+    const [loading, setLoading] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
@@ -70,39 +71,50 @@ export default function AccountDetails({ secret }) {
                     userId,
                 }),
             });
+            if (res.ok) {
+                setLoading(false);
+            }
+
+            if (res.error) {
+                setLoading(false);
+            }
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             console.log(error);
         }
     };
 
     function saveChanges() {
+        setLoading(true);
         handleSubmit();
     }
 
     return (
         <div className="flex flex-col w-full p-2">
+            {loading ? <Loader /> : null}
             <p className="text-base font-semibold p-2">Account Details</p>
             <hr className="border-b-1 m-2" />
             <p className="p-2 text-sm text-[#323232] mt-1">
                 Logged in with {userData ? userData.provider : null}
             </p>
             <div className="flex gap-2 mt-2 text-[#323232]">
-                <div className="flex-col p-2 text-sm">
+                <div className="flex-col p-2 text-sm flex-1">
                     <p className="mb-2">First Name</p>
                     <input
                         placeholder="Enter your first name"
                         type="text"
-                        className="outline-none p-2 border"
+                        className="outline-none p-2 border w-full"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                     />
                 </div>
-                <div className="flex-col p-2 text-sm">
+                <div className="flex-col p-2 text-sm flex-1">
                     <p className="mb-2">Last Name</p>
                     <input
                         placeholder="Enter your last name"
                         type="text"
-                        className="outline-none p-2 border"
+                        className="outline-none p-2 border w-full"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                     />
