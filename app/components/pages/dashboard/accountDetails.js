@@ -13,7 +13,6 @@ export default function AccountDetails({ secret }) {
 
     const sessionUser = session ? session.user : null;
 
-    const [loading, setLoading] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
@@ -71,28 +70,17 @@ export default function AccountDetails({ secret }) {
                     userId,
                 }),
             });
-            if (res.ok) {
-                setLoading(false);
-            }
-
-            if (res.error) {
-                setLoading(false);
-            }
-            setLoading(false);
         } catch (error) {
-            setLoading(false);
             console.log(error);
         }
     };
 
     function saveChanges() {
-        setLoading(true);
         handleSubmit();
     }
 
     return (
         <div className="flex flex-col w-full p-2">
-            {loading ? <Loader /> : null}
             <p className="text-base font-semibold p-2">Account Details</p>
             <hr className="border-b-1 m-2" />
             <p className="p-2 text-sm text-[#323232] mt-1">
