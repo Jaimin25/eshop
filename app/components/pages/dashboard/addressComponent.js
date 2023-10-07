@@ -1,4 +1,32 @@
-export default function AddressLayout() {
+"use client";
+
+import { base_url } from "@/app/lib/baseUrl";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
+export default function AddressLayout({ secret }) {
+    const { data: session } = useSession();
+    const sessionUser = session ? session.user : null;
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true);
+        getUserAddress();
+    }, [sessionUser]);
+    console.log(sessionUser);
+    const getUserAddress = async (e) => {
+        try {
+            const res = await fetch(
+                `${base_url}/api/account/address?userId=${
+                    sessionUser?.userid
+                }&secretKey=${encodeURIComponent(secret)}`
+            );
+            console.log(await res.json());
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+            return null;
+        }
+    };
     return (
         <div className="flex flex-col w-full p-2">
             <p className="text-base font-bold p-2 text-[#262626]">Address</p>

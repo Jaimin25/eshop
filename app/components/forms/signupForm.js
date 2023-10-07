@@ -18,7 +18,7 @@ export default function SignUpForm() {
     const handleSubmit = async (e) => {
         try {
             const checkUserExists = await fetch(
-                `${base_url}/api/userExists?email=${email}`
+                `${base_url}/api/account/userExists?email=${email}`
             );
             const user = await checkUserExists.json();
             const provider = "credentials";

@@ -32,32 +32,34 @@ export default function Layout({ children }) {
     ];
 
     return (
-        <main className="flex w-full justify-center mt-8">
-            <div className="flex flex-col items-center text-center bg-white p-2 pt- w-3/12">
-                <p className="font-semibold border w-full px-[10px] py-[8px]">
-                    Account
-                </p>
-                <button className="border w-full px-[10px] py-[8px]">
-                    <Link href="/dashboard">Account Details</Link>
-                </button>
-                <Link
-                    href="/dashboard/address"
-                    className="border w-full px-[10px] py-[8px]">
-                    <button>Address</button>
-                </Link>
-                <Link
-                    href="/dashboard/orders"
-                    className="border w-full px-[10px] py-[8px]">
-                    <button>Orders</button>
-                </Link>
-                <Link
-                    href="/dashboard/wishlist"
-                    className="border w-full px-[10px] py-[8px]">
-                    <button>Wishlist</button>
-                </Link>
-            </div>
-            <div className="w-7/12 flex justify-center bg-white">
-                {children}
+        <main className="flex w-full justify-center mt-8 px-10">
+            <div className="flex shadow w-full lg:w-4/5">
+                <div className="flex flex-col items-center text-center bg-white p-2 text-sm pt-3 w-1/2">
+                    <p className="font-semibold border w-full px-[10px] py-[8px]">
+                        Account
+                    </p>
+                    <button className="border w-full px-[10px] py-[8px]">
+                        <Link href="/dashboard">Account Details</Link>
+                    </button>
+                    <Link
+                        href="/dashboard/address"
+                        className="border w-full px-[10px] py-[8px]">
+                        <button>Address</button>
+                    </Link>
+                    <Link
+                        href="/dashboard/orders"
+                        className="border w-full px-[10px] py-[8px]">
+                        <button>Orders</button>
+                    </Link>
+                    <Link
+                        href="/dashboard/wishlist"
+                        className="border w-full px-[10px] py-[8px]">
+                        <button>Wishlist</button>
+                    </Link>
+                </div>
+                <div className="w-full flex justify-center bg-white">
+                    {children}
+                </div>
             </div>
         </main>
     );

@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-    const url_secret = new URL(req.url).searchParams.get("secret");
+    const url_secret = new URL(req.url).searchParams.get("secretKey");
     const secret = process.env.protection_secret;
 
     let result = {};

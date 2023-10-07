@@ -103,6 +103,7 @@ export const authOptions = {
             });
             if (userData) {
                 session.session.user.name = userData.fullname;
+                session.session.user.userid = userData._id;
             }
             return session.session;
         },
