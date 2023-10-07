@@ -29,3 +29,72 @@ export async function GET(req) {
     }
     return NextResponse.json(result);
 }
+
+export async function POST(req) {
+    const { address, city, state, country, zipcode, secretKey, userId } =
+        await req.json();
+    const secretCheck = process.env.protection_secret;
+    let result = {};
+
+    if (secretCheck === secretKey) {
+        try {
+            await mongoose.connect(connectionSrv);
+            await UserAddress.create({
+                userid: userId,
+                address,
+                city,
+                state,
+                country,
+                zipcode,
+            });
+            result = { result: "Added address successfully", success: true };
+        } catch (error) {
+            console.log(error);
+            result = { result: error, success: false };
+        }
+    } else {
+        result = { result: "You don't have access!", success: false };
+    }
+    return NextResponse.json(result);
+}
+
+export async function PUT(req) {
+    const {
+        address,
+        city,
+        state,
+        country,
+        zipcode,
+        secretKey,
+        addressId,
+        userId,
+    } = await req.json();
+    const secretCheck = process.env.protection_secret;
+
+    let result = {};
+
+    if (secretCheck === secretKey) {
+        try {
+            await mongoose.connect(connectionSrv);
+            const filter = { _id: addressId };
+            const update = {
+                userid: userId,
+                address: address,
+                city: city,
+                state: state,
+                country: country,
+                zipcode: zipcode,
+            };
+            const doc = await UserAddress.findOneAndUpdate(filter, update, {
+                new: true,
+            });
+            console.log(doc);
+            result = { result: "Address updated!", succes: true };
+        } catch (error) {
+            result = { result: error, success: false };
+        }
+    } else {
+        result = { result: "You don't have access!", success: false };
+    }
+    return NextResponse.json(result);
+}

@@ -49,6 +49,7 @@ export async function PUT(req) {
             const doc = await User.findOneAndUpdate(filter, update, {
                 new: true,
             });
+            result = { result: "Details updated!", succes: true };
         } catch (error) {
             result = { result: error, success: false };
         }

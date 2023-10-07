@@ -9,7 +9,7 @@ const addressModel = new mongoose.Schema(
         country: String,
         zipcode: String,
     },
-    { timestamp: true }
+    { timestamps: true }
 );
 
 export const UserAddress =
