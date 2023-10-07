@@ -20,7 +20,7 @@ export default function AccountDetails({ secret }) {
     useEffect(() => {
         setLoading(true);
         getUserDetails();
-    }, [sessionUser]);
+    }, [1]);
 
     const getUserDetails = async (e) => {
         try {
