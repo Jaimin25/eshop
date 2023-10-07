@@ -18,12 +18,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+    const secret = process.env.protection_secret;
     return (
         <html lang="en">
             <body className={poppins.className}>
                 <AuthProvider>
                     <main className="flex flex-col min-h-screen h-full place-content-between">
-                        <NavBar />
+                        <NavBar secret={secret} />
                         {children}
                         <Footer />
                     </main>

@@ -10,17 +10,34 @@ import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 import { Badge } from "@material-tailwind/react";
 
 import { signOut, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { base_url } from "@/app/lib/baseUrl";
 
-export default function NavBar() {
+export default function NavBar({ secret }) {
+    const [count, setCount] = useState(0);
     const { data: session } = useSession();
-
     const sessionUser = session ? session.user : null;
 
+    useEffect(() => {
+        if (sessionUser) {
+            getUserCart();
+        }
+    }, [sessionUser]);
+
+    const getUserCart = async (e) => {
+        const res = await fetch(
+            `${base_url}/api/account/user/cart?userId=${
+                sessionUser.userid
+            }&secretKey=${encodeURIComponent(secret)}`
+        );
+        let cartList = await res.json();
+        cartList = cartList.result;
+        setCount(cartList.cart.length);
+    };
     return (
         <nav className="flex shadow-md h-[64px] items-center backdrop-blur-sm sticky top-0 z-50 bg-white/80">
             <div className="flex w-full justify-center items-center">
-                <div className="flex flex-1 justify-center lg:justify-start md:justify-start items-center p-2">
+                <div className="flex flex-1 items-center p-2">
                     <Link
                         href="/"
                         className="flex justify-center items-center">
@@ -38,17 +55,26 @@ export default function NavBar() {
 
             <div className="items-center text-center mr-4">
                 <div className="flex justify-center items-center gap-2 font-semibold text-center">
-                    <Badge
-                        content="5"
-                        overlap="circular"
-                        color="blue">
+                    {count > 0 ? (
+                        <Badge
+                            content={count}
+                            overlap="circular"
+                            color="blue">
+                            <Link href="/cart">
+                                <ShoppingBagOutlinedIcon
+                                    className="lg:mr-2 md:mr-2"
+                                    fontSize="medium"
+                                />
+                            </Link>
+                        </Badge>
+                    ) : (
                         <Link href="/cart">
                             <ShoppingBagOutlinedIcon
                                 className="lg:mr-2 md:mr-2"
                                 fontSize="medium"
                             />
                         </Link>
-                    </Badge>
+                    )}
                     <Link href="/shop">
                         <div className="hidden lg:flex md:flex">Shop</div>
                         <div className="flex lg:hidden md:hidden">
