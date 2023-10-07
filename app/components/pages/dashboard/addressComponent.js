@@ -17,7 +17,7 @@ export default function AddressLayout({ secret }) {
     const { data: session } = useSession();
     const sessionUser = session ? session.user : null;
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);

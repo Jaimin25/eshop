@@ -20,7 +20,7 @@ export default function NavBar() {
     return (
         <nav className="flex shadow-md h-[64px] items-center backdrop-blur-sm sticky top-0 z-50 bg-white/80">
             <div className="flex w-full justify-center items-center">
-                <div className="flex flex-1 justify-center lg:justify-start md:justify-start items-center p-2">
+                <div className="flex flex-1 items-center p-2">
                     <Link
                         href="/"
                         className="flex justify-center items-center">
