@@ -17,7 +17,7 @@ export default function LoginForm() {
     const handleSubmit = async (e) => {
         try {
             const checkUserExists = await fetch(
-                `${base_url}/api/userExists?email=${email}`
+                `${base_url}/api/account/userExists?email=${email}`
             );
             const user = await checkUserExists.json();
 
@@ -53,7 +53,8 @@ export default function LoginForm() {
             setError(error);
         }
     };
-    function signInUser() {
+    function signInUser(event) {
+        event.preventDefault();
         setLoading(true);
         handleSubmit();
     }
@@ -61,7 +62,9 @@ export default function LoginForm() {
         <div className="flex flex-col bg-white p-4 px-8 gap-4 w-full lg:w-1/3 md:w-1/2">
             {loading ? <Loader /> : null}
             <p className="text-xl font-semibold">Login</p>
-            <form>
+            <form
+                onSubmit={signInUser}
+                className="flex flex-col bg-white gap-4 w-full">
                 <Input
                     label="Email"
                     onChange={(e) => setEmail(e.target.value)}
@@ -91,6 +94,7 @@ export default function LoginForm() {
                     </span>
                 )}
                 <button
+                    type="submit"
                     onClick={signInUser}
                     className="border px-8 py-2 hover:bg-[#00000020] transition">
                     Sign In

@@ -18,15 +18,16 @@ export default function AccountDetails({ secret }) {
     const [lastName, setLastName] = useState("");
 
     useEffect(() => {
+        setLoading(true);
         getUserDetails();
-    }, [sessionUser]);
+    }, [1]);
 
     const getUserDetails = async (e) => {
         try {
             const res = await fetch(
-                `${base_url}/api/user?email=${
+                `${base_url}/api/account/user?email=${
                     sessionUser?.email
-                }&secret=${encodeURIComponent(secret)}`
+                }&secretKey=${encodeURIComponent(secret)}`
             );
 
             if (res.ok) {
@@ -43,11 +44,14 @@ export default function AccountDetails({ secret }) {
                         ? String(userdata.result.user.fullname).split(" ")[1]
                         : ""
                 );
+                setLoading(false);
             } else {
+                setLoading(false);
                 console.error("Failed to fetch data:", res.statusText);
             }
             return;
         } catch (error) {
+            setLoading(false);
             console.log(error);
             return null;
         }
@@ -60,7 +64,7 @@ export default function AccountDetails({ secret }) {
 
             const secretKey = secret;
 
-            const res = await fetch(`${base_url}/api/user`, {
+            const res = await fetch(`${base_url}/api/account/user`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -73,6 +77,7 @@ export default function AccountDetails({ secret }) {
             });
             if (res.ok) {
                 setLoading(false);
+                window.location.reload();
             }
 
             if (res.error) {
