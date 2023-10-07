@@ -138,7 +138,7 @@ export default function AddressLayout({ secret }) {
                 placeholder="City"
                 onChange={(e) => setCity(e.target.value)}
             />
-            <div className="flex">
+            <div className="flex flex-col lg:flex-row md:flex-row">
                 <div className="flex flex-col mr-2 flex-1">
                     <p className="px-2 py-4 pb-1 text-sm">State</p>
                     <input
