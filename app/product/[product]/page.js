@@ -13,10 +13,14 @@ export default async function ProductDetail(res) {
 
     const productDetail = await getProduct(param);
     const imageList = productDetail.images;
+
+    const secret = process.env.protection_secret;
+
     return (
         <ProductDetails
             productDetail={productDetail}
             imageList={imageList}
+            secretKey={secret}
         />
     );
 }

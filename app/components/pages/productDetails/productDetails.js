@@ -9,7 +9,11 @@ import Ratings from "./ratingSection";
 import ProductInfoSection from "./productInfoSection";
 import Review from "./reviewSection";
 
-export default function ProductDetails({ productDetail, imageList }) {
+export default function ProductDetails({
+    productDetail,
+    imageList,
+    secretKey,
+}) {
     const [loading, setLoading] = useState(true);
     const [url, setUrl] = useState("");
     const [imgUrl, setImgUrl] = productDetail.thumbnail
@@ -38,6 +42,7 @@ export default function ProductDetails({ productDetail, imageList }) {
                 changeImage={changeImage}
                 shareQuote={shareQuote}
                 setLoading={setLoading}
+                secretKey={secretKey}
             />
             <div className="product-container flex flex-col mx-auto px-4 md:flex-row lg:flex-row justify-center items-center lg:items-start md:items-start">
                 <Ratings rating={productDetail.rating} />

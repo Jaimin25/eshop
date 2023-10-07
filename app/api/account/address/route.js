@@ -88,7 +88,7 @@ export async function PUT(req) {
             const doc = await UserAddress.findOneAndUpdate(filter, update, {
                 new: true,
             });
-            console.log(doc);
+
             result = { result: "Address updated!", succes: true };
         } catch (error) {
             result = { result: error, success: false };

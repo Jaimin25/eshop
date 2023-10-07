@@ -76,8 +76,8 @@ export default function AccountDetails({ secret }) {
                 }),
             });
             if (res.ok) {
+                reloadSession();
                 setLoading(false);
-                window.location.reload();
             }
 
             if (res.error) {
@@ -88,6 +88,11 @@ export default function AccountDetails({ secret }) {
             setLoading(false);
             console.log(error);
         }
+    };
+
+    const reloadSession = () => {
+        const event = new Event("visibilitychange");
+        document.dispatchEvent(event);
     };
 
     function saveChanges() {
