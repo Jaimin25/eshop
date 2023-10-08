@@ -12,13 +12,17 @@ export default function CartSection({ secretKey }) {
     const sessionUser = session ? session.user : null;
 
     const [loading, setLoading] = useState(false);
+    const [itemRemoved, setItemRemoved] = useState("");
+    const [filteredCart, setFilteredCart] = useState([]);
 
     let sumTotal = 0;
 
     useEffect(() => {
-        setLoading(true);
-        getUserCart();
-    }, [session]);
+        if (itemRemoved === "") {
+            setLoading(true);
+            getUserCart();
+        }
+    }, [session, itemRemoved]);
 
     const getUserCart = async () => {
         try {
@@ -61,14 +65,14 @@ export default function CartSection({ secretKey }) {
         return result;
     };
 
-    const [itemRemoved, setItemRemoved] = useState("");
-    const [filteredCart, setFilteredCart] = useState([]);
-
     useEffect(() => {
         const newFilteredCart = filteredCart.filter(
             (item) => item._id !== itemRemoved
         );
         setFilteredCart(newFilteredCart);
+        if (itemRemoved !== "") {
+            setLoading(false);
+        }
     }, [itemRemoved]);
 
     return (
@@ -95,9 +99,9 @@ export default function CartSection({ secretKey }) {
                         </p>
                     </div>
                 </div>
-            ) : (
-                !loading && <EmptyCart />
-            )}
+            ) : !loading ? (
+                <EmptyCart />
+            ) : null}
         </div>
     );
 }

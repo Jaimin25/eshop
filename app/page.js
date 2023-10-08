@@ -44,10 +44,12 @@ export default function Home() {
                     <Image
                         src={sale1}
                         className="lg:h-44 lg:w-[192px] object-cover lg:object-cover pb-6 lg:pb-2"
+                        alt="sale1"
                     />
                     <Image
                         src={sale3}
                         className="lg:h-44 lg:w-[192px] object-cover lg:object-cover lg:pt-2"
+                        alt="sale3"
                     />
                 </div>
             </div>
