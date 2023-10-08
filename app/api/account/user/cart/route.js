@@ -67,3 +67,27 @@ export async function POST(req) {
 
     return NextResponse.json(result);
 }
+
+export async function DELETE(req) {
+    const { userid, cartProductId, secretKey } = await req.json();
+    const secretCheck = process.env.protection_secret;
+    let result = {};
+
+    if (secretCheck === secretKey) {
+        await mongoose.connect(connectionSrv);
+        const data = await UserCart.deleteOne({
+            _id: cartProductId,
+            userid: userid,
+        });
+
+        if (data.acknowledged === true) {
+            result = { result: "Removed from cart!", success: true };
+        } else {
+            result = { result: "Error removing from cart", success: false };
+        }
+    } else {
+        result = { result: "You don't have access!", success: false };
+    }
+
+    return NextResponse.json(result);
+}

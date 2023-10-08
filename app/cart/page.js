@@ -6,33 +6,6 @@ import { authOptions } from "../api/auth/[...nextauth]/options";
 import { base_url } from "../lib/baseUrl";
 import CartSection from "../components/pages/cart/cartSection";
 
-async function getUserCart(userid, secretKey) {
-    const res = await fetch(
-        `${base_url}/api/account/user/cart?userId=${userid}&secretKey=${encodeURIComponent(
-            secretKey
-        )}`
-    );
-    const result = await res.json();
-    const cart = result.result.cart;
-    const productDetails = [];
-
-    for (const item of cart) {
-        const productDetail = await getProductDetails(
-            item.productid,
-            item.quantity
-        );
-        productDetails.push(productDetail);
-    }
-    return productDetails;
-}
-
-async function getProductDetails(id, quantity) {
-    const res = await fetch(`https://dummyjson.com/products/${id}`);
-    const result = await res.json();
-    result.quantity = quantity;
-    return result;
-}
-
 export default async function Cart() {
     const session = await getServerSession(authOptions);
     const secretKey = process.env.protection_secret;
@@ -40,11 +13,42 @@ export default async function Cart() {
 
     const cartProducts = await getUserCart(userid, secretKey);
 
+    async function getUserCart(userid, secretKey) {
+        const res = await fetch(
+            `${base_url}/api/account/user/cart?userId=${userid}&secretKey=${encodeURIComponent(
+                secretKey
+            )}`
+        );
+        const result = await res.json();
+        const cart = result.result.cart;
+        const productDetails = [];
+        for (const item of cart) {
+            const productDetail = await getProductDetails(
+                item.productid,
+                item.quantity,
+                item._id
+            );
+            productDetails.push(productDetail);
+        }
+        return productDetails;
+    }
+
+    async function getProductDetails(id, quantity, cartid) {
+        const res = await fetch(`https://dummyjson.com/products/${id}`);
+        const result = await res.json();
+        result.quantity = quantity;
+        result._id = cartid;
+        return result;
+    }
+
     return (
-        <div className="flex mt-[32px] w-full h-full p-4 pt-0 justify-center items-center">
-            <div className="flex w-5/6 justify-center">
+        <div className="flex mt-[32px] w-full h-full md:p-4 lg:p-4 pt-0 justify-center items-center">
+            <div className="flex lg:w-5/6 md:w-5/6 w-full justify-center">
                 {cartProducts.length > 0 ? (
-                    <CartSection cartProducts={cartProducts} />
+                    <CartSection
+                        cartProducts={cartProducts}
+                        secretKey={secretKey}
+                    />
                 ) : (
                     <div className="mx-2 flex flex-col bg-white justify-center items-center w-[350px] h-[350px] shadow">
                         <FontAwesomeIcon
