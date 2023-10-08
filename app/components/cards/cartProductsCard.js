@@ -1,8 +1,11 @@
 import Image from "next/image";
+import { DeleteOutline } from "@mui/icons-material";
+import RemoveFromCart from "../ui/buttons/removeFromCartButton";
 
 export default function CartProduct({ item }) {
+    const secretKey = process.env.protection_secret;
     return (
-        <div className="bg-white flex m-2 shadow items-center">
+        <div className="bg-white flex m-2 shadow">
             <div className="flex h-[110px] w-[150px] px-2">
                 <Image
                     src={item.thumbnail}
@@ -12,7 +15,7 @@ export default function CartProduct({ item }) {
                     className="object-contain w-full"
                 />
             </div>
-            <div className="flex flex-col px-2">
+            <div className="flex flex-col flex-1 px-2 justify-center">
                 <p>{item.title}</p>
                 <p className="text-sm text-[#323232]">
                     Quantity: {item.quantity}
@@ -21,6 +24,10 @@ export default function CartProduct({ item }) {
                     Price: ${item.price * item.quantity}
                 </p>
             </div>
+            <RemoveFromCart
+                item={item}
+                secretKey={secretKey}
+            />
         </div>
     );
 }

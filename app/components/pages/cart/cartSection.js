@@ -1,7 +1,9 @@
 import CartProduct from "../../cards/cartProductsCard";
+import RemoveFromCart from "../../ui/buttons/removeFromCartButton";
 
 export default function CartSection({ cartProducts }) {
     let sumTotal = 0;
+
     return (
         <div className="w-full">
             {cartProducts.map((item, index) => (
