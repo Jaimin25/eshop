@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Loader from "../loader";
 
-export default function RemoveFromCart({ item, secretKey }) {
+export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
     const { data: session } = useSession();
     const sessionUser = session ? session.user : null;
     const [loading, setLoading] = useState(false);
@@ -23,8 +23,9 @@ export default function RemoveFromCart({ item, secretKey }) {
         });
 
         if (res.ok) {
-            setLoading(false);
             reloadSession();
+            setLoading(false);
+            onItemRemove(item._id);
         }
 
         if (res.error) {
@@ -32,6 +33,7 @@ export default function RemoveFromCart({ item, secretKey }) {
             setLoading(false);
         }
     };
+
     function removeFromCart() {
         setLoading(true);
         submitRemoveFromCart();

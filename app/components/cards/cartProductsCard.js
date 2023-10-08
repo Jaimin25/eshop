@@ -1,9 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { DeleteOutline } from "@mui/icons-material";
 import RemoveFromCart from "../ui/buttons/removeFromCartButton";
+import { useEffect, useState } from "react";
 
-export default function CartProduct({ item }) {
-    const secretKey = process.env.protection_secret;
+export default function CartProduct({ item, secretKey, onItemChange }) {
     return (
         <div className="bg-white flex m-2 shadow">
             <div className="flex h-[110px] w-[150px] px-2">
@@ -27,6 +29,7 @@ export default function CartProduct({ item }) {
             <RemoveFromCart
                 item={item}
                 secretKey={secretKey}
+                onItemRemove={onItemChange}
             />
         </div>
     );

@@ -45,7 +45,10 @@ export default async function Cart() {
         <div className="flex mt-[32px] w-full h-full md:p-4 lg:p-4 pt-0 justify-center items-center">
             <div className="flex lg:w-5/6 md:w-5/6 w-full justify-center">
                 {cartProducts.length > 0 ? (
-                    <CartSection cartProducts={cartProducts} />
+                    <CartSection
+                        cartProducts={cartProducts}
+                        secretKey={secretKey}
+                    />
                 ) : (
                     <div className="mx-2 flex flex-col bg-white justify-center items-center w-[350px] h-[350px] shadow">
                         <FontAwesomeIcon
