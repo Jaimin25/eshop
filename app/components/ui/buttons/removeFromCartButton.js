@@ -44,14 +44,15 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
         document.dispatchEvent(event);
     };
     return (
-        <>
+        <div>
             {loading ? <Loader /> : null}
             <div className="flex justify-start items-start text-start pt-4 px-2 ">
-                <DeleteOutline
+                <div
                     onClick={removeFromCart}
-                    className="hover:cursor-pointer text-red-400 hover:text-red-700"
-                />
+                    className="hover:cursor-pointer text-red-400 hover:text-red-700">
+                    <DeleteOutline />
+                </div>
             </div>
-        </>
+        </div>
     );
 }
