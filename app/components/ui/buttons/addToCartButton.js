@@ -34,7 +34,7 @@ export default function AddToCartButton({ productDetail, secretKey }) {
         document.dispatchEvent(event);
     };
     function addToCart() {
-        addToCartSubmit();
+        if (sessionUser) addToCartSubmit();
     }
     return (
         <>

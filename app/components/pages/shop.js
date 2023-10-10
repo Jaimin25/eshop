@@ -22,7 +22,7 @@ export default function ShopPage({ categoryList, productsList, secretKey }) {
 
     const [selectedCategory, setSelectedCategory] = useState(storedCategory);
 
-    const [updatedProducts, setUpdatedProducts] = useState([]);
+    const [updatedProducts, setUpdatedProducts] = useState(filteredProducts);
     const filterProducts = () => {
         let filtered = [...productsList];
 
@@ -114,7 +114,9 @@ export default function ShopPage({ categoryList, productsList, secretKey }) {
                 </div>
             </div>
             <ProductsSection
-                filteredProducts={updatedProducts}
+                filteredProducts={
+                    sessionUser ? updatedProducts : filteredProducts
+                }
                 filterProducts={filterProducts}
                 selectedCategory={selectedCategory}
                 selectedRating={selectedRating}

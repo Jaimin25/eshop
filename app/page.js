@@ -5,6 +5,7 @@ import sale1 from "../public/sale1.jpg";
 import sale3 from "../public/sale3.jpg";
 import Link from "next/link";
 import Promo from "./components/pages/promo";
+import { Toast } from "./components/ui/toast";
 
 export default function Home() {
     return (

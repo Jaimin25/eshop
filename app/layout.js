@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import AuthProvider from "./context/AuthProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/options";
+import { Toast } from "./components/ui/toast";
 
 const poppins = Poppins({
     weight: "400",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
                 <AuthProvider>
                     <main className="flex flex-col min-h-screen h-full place-content-between">
                         <NavBar secret={secret} />
+
                         {children}
                         <Footer />
                     </main>
