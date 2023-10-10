@@ -5,8 +5,12 @@ import CategoryFilter from "../filters/categoryFilter";
 import PriceFilter from "../filters/priceFilter";
 import RatingFilter from "../filters/ratingFilter";
 import ProductsSection from "./pagination";
+import { useSession } from "next-auth/react";
 
-export default function ShopPage({ categoryList, productsList }) {
+export default function ShopPage({ categoryList, productsList, secretKey }) {
+    const { data: session } = useSession();
+    const sessionUser = session ? session.user : null;
+
     const [selectedRating, setSelectedRating] = useState(null);
     const [selectedPrice, setSelectedPrice] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState(productsList);
@@ -80,6 +84,8 @@ export default function ShopPage({ categoryList, productsList }) {
                 selectedCategory={selectedCategory}
                 selectedRating={selectedRating}
                 selectedPrice={selectedPrice}
+                user={sessionUser}
+                secretKey={secretKey}
             />
         </div>
     );

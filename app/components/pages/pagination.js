@@ -2,17 +2,21 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../cards/productsCard";
 import PaginationButton from "../ui/buttons/paginationButtons";
+import { getSession, useSession } from "next-auth/react";
 
-export default function ProductsSection({
+export default async function ProductsSection({
     filteredProducts,
     filterProducts,
     selectedCategory,
     selectedPrice,
     selectedRating,
+    user,
+    secretKey,
 }) {
     const [currentPage, setCurrentPage] = useState(5);
     const [startIndex, setStartIndex] = useState(0);
     const [endIndex, setEndIndex] = useState(10);
+    const secretKey = process.env.protection_secret;
 
     const totalPages = [...Array(Math.ceil(filteredProducts.length / 10))];
 
@@ -52,6 +56,8 @@ export default function ProductsSection({
                                 <ProductCard
                                     item={item}
                                     key={index}
+                                    secret={secretKey}
+                                    user={user}
                                 />
                             ))}
                     </div>
