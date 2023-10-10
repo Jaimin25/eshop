@@ -19,9 +19,7 @@ export default function AddToWishlistButton({
     useEffect(() => {
         setProductIsFav(isFav);
     }, [isFav]);
-    const isFavClass = productIsFav
-        ? "text-red-500 hover:text-red-700"
-        : "text-gray-400 hover:text-red-500";
+    const isFavClass = productIsFav ? "text-red-500" : "text-gray-400";
     const classAtts = `flex top-2 right-2 p-2 ${isFavClass} `;
 
     function addToWishlist() {
