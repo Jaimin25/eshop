@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../cards/productsCard";
 import PaginationButton from "../ui/buttons/paginationButtons";
+import { getSession, useSession } from "next-auth/react";
+import { base_url } from "@/app/lib/baseUrl";
 
 export default function ProductsSection({
     filteredProducts,
@@ -9,6 +11,8 @@ export default function ProductsSection({
     selectedCategory,
     selectedPrice,
     selectedRating,
+    user,
+    secretKey,
 }) {
     const [currentPage, setCurrentPage] = useState(5);
     const [startIndex, setStartIndex] = useState(0);
@@ -52,6 +56,8 @@ export default function ProductsSection({
                                 <ProductCard
                                     item={item}
                                     key={index}
+                                    secretKey={secretKey}
+                                    user={user}
                                 />
                             ))}
                     </div>

@@ -5,8 +5,13 @@ import CategoryFilter from "../filters/categoryFilter";
 import PriceFilter from "../filters/priceFilter";
 import RatingFilter from "../filters/ratingFilter";
 import ProductsSection from "./pagination";
+import { useSession } from "next-auth/react";
+import { base_url } from "@/app/lib/baseUrl";
 
-export default function ShopPage({ categoryList, productsList }) {
+export default function ShopPage({ categoryList, productsList, secretKey }) {
+    const { data: session } = useSession();
+    const sessionUser = session ? session.user : null;
+
     const [selectedRating, setSelectedRating] = useState(null);
     const [selectedPrice, setSelectedPrice] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState(productsList);
@@ -17,6 +22,7 @@ export default function ShopPage({ categoryList, productsList }) {
 
     const [selectedCategory, setSelectedCategory] = useState(storedCategory);
 
+    const [updatedProducts, setUpdatedProducts] = useState(filteredProducts);
     const filterProducts = () => {
         let filtered = [...productsList];
 
@@ -40,6 +46,39 @@ export default function ShopPage({ categoryList, productsList }) {
         setFilteredProducts(filtered);
     };
 
+    useEffect(() => {
+        if (sessionUser) {
+            getUserWishlist();
+        }
+    }, [filteredProducts, sessionUser]);
+
+    const getUserWishlist = async () => {
+        const res = await fetch(
+            `${base_url}/api/account/user/wishlist?userId=${
+                sessionUser.userid
+            }&secretKey=${encodeURIComponent(secretKey)}`
+        );
+
+        if (res.ok) {
+            const data = await res.json();
+            const wishlist = data.result.wishlist;
+            const updatedProducts = filteredProducts.map((product) => {
+                if (
+                    wishlist.some(
+                        (wishlistItem) =>
+                            wishlistItem.productid === product.id.toString()
+                    )
+                ) {
+                    return { ...product, wishlist: true };
+                } else {
+                    return { ...product, wishlist: false };
+                }
+                return product;
+            });
+
+            setUpdatedProducts(updatedProducts);
+        }
+    };
     return (
         <div className="p-3 flex flex-col lg:flex-row justify-center ">
             <div className="p-1 lg:w-1/5 lg:mr-1 md:mr-1 md:w-full justify-center ">
@@ -75,11 +114,15 @@ export default function ShopPage({ categoryList, productsList }) {
                 </div>
             </div>
             <ProductsSection
-                filteredProducts={filteredProducts}
+                filteredProducts={
+                    sessionUser ? updatedProducts : filteredProducts
+                }
                 filterProducts={filterProducts}
                 selectedCategory={selectedCategory}
                 selectedRating={selectedRating}
                 selectedPrice={selectedPrice}
+                user={sessionUser}
+                secretKey={secretKey}
             />
         </div>
     );

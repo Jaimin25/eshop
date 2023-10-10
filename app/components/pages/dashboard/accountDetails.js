@@ -5,6 +5,7 @@ import { Input } from "@material-tailwind/react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loader from "../../ui/loader";
+import { Toast } from "../../ui/toast";
 
 export default function AccountDetails({ secret }) {
     let [userData, setUserData] = useState([]);
@@ -16,6 +17,9 @@ export default function AccountDetails({ secret }) {
     const [loading, setLoading] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+
+    const [response, setResponse] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
         setLoading(true);
@@ -76,6 +80,9 @@ export default function AccountDetails({ secret }) {
                 }),
             });
             if (res.ok) {
+                const result = await res.json();
+                setResponse(result.result);
+                setSuccess(true);
                 reloadSession();
                 setLoading(false);
             }
@@ -102,7 +109,18 @@ export default function AccountDetails({ secret }) {
 
     return (
         <div className="flex flex-col w-full p-2">
-            {loading ? <Loader /> : null}
+            {loading ? (
+                <div>
+                    <Loader />
+                </div>
+            ) : null}
+            {response ? (
+                <Toast
+                    msg={response}
+                    type={success}
+                />
+            ) : null}
+
             <p className="text-base font-semibold p-2">Account Details</p>
             <hr className="border-b-1 m-2" />
             <p className="p-2 text-sm text-[#323232] mt-1">

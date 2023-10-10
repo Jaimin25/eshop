@@ -1,4 +1,6 @@
+import { getSession } from "next-auth/react";
 import ShopPage from "../components/pages/shop";
+import { getServerSession } from "next-auth";
 
 async function getProducts() {
     const url = `https://dummyjson.com/products?limit=0`;
@@ -17,12 +19,13 @@ async function getCategories() {
 
 export default async function Shop() {
     const productsList = await getProducts();
-
     const categoryList = await getCategories();
+    const secretKey = process.env.protection_secret;
     return (
         <ShopPage
             categoryList={categoryList}
             productsList={productsList}
+            secretKey={secretKey}
         />
     );
 }

@@ -5,7 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function EmptyCart() {
     return (
-        <div className="mx-2 flex flex-col bg-white justify-center items-center w-[350px] h-[350px] shadow">
+        <div className="mx-6 flex flex-col bg-white justify-center items-center w-[350px] h-[350px] shadow">
             <div>
                 <ShoppingCartIcon fontSize="large" />
             </div>
