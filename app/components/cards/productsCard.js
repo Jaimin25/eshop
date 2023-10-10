@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import AddToWishlistButton from "../ui/buttons/addToWishlistButton";
 
-export default function ProductCard({ item }) {
+export default function ProductCard({ item, user, secretKey }) {
     return (
         <div className="flex flex-col card rounded-sm shadow font-normal bg-white cursor-pointer">
             <Link
@@ -40,7 +40,12 @@ export default function ProductCard({ item }) {
                         </p>
                     </Link>
                 </div>
-                <AddToWishlistButton />
+                <AddToWishlistButton
+                    isFav={item.wishlist}
+                    user={user}
+                    secretKey={secretKey}
+                    productid={item.id}
+                />
             </div>
             <Link
                 href={{
