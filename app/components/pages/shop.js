@@ -22,7 +22,7 @@ export default function ShopPage({ categoryList, productsList, secretKey }) {
 
     const [selectedCategory, setSelectedCategory] = useState(storedCategory);
 
-    const [updatedProducts, setUpdatedProducts] = useState(productsList);
+    const [updatedProducts, setUpdatedProducts] = useState([]);
     const filterProducts = () => {
         let filtered = [...productsList];
 
@@ -70,11 +70,12 @@ export default function ShopPage({ categoryList, productsList, secretKey }) {
                     )
                 ) {
                     return { ...product, wishlist: true };
+                } else {
+                    return { ...product, wishlist: false };
                 }
                 return product;
             });
 
-            console.log(updatedProducts);
             setUpdatedProducts(updatedProducts);
         }
     };
