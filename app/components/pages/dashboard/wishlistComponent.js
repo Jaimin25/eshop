@@ -75,8 +75,12 @@ export default function WishlistComponent({ secret }) {
     }, [itemRemoved]);
 
     return (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex flex-col justify-center">
             {loading ? <Loader /> : null}
+            <p className="text-base font-bold p-2 text-[#262626]">
+                Your Wishlist
+            </p>
+            <hr className="border-b-1 m-2" />
             {filteredCart.length > 0 ? (
                 <div className="w-full">
                     {filteredCart.map((item, index) => (
@@ -88,7 +92,13 @@ export default function WishlistComponent({ secret }) {
                         />
                     ))}
                 </div>
-            ) : null}
+            ) : (
+                <div className="flex flex-1 justify-center">
+                    <p className="p-2">
+                        You have no items in your wishlist yet.
+                    </p>
+                </div>
+            )}
         </div>
     );
 }
