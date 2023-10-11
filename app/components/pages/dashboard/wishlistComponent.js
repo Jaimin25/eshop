@@ -16,6 +16,7 @@ export default function WishlistComponent({ secret }) {
     const [filteredCart, setFilteredCart] = useState([]);
 
     useEffect(() => {
+        setItemRemoved("");
         if (itemRemoved === "") {
             setLoading(true);
             getUserWishlist();
@@ -32,7 +33,6 @@ export default function WishlistComponent({ secret }) {
             if (res.ok) {
                 const result = await res.json();
                 const wishlist = result.result.wishlist;
-                console.log(result);
 
                 const wishlistProducts = await Promise.all(
                     wishlist.map(async (item) => {
