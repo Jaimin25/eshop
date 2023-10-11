@@ -12,15 +12,26 @@ export default function AddToWishlistButton({
     productid,
 }) {
     const userid = user ? user.userid : null;
-    const [productIsFav, setProductIsFav] = useState(false);
-
     const [loading, setLoading] = useState(false);
+    const [classAttr, setClassAttr] = useState(null);
+    const [productIsFav, setProductIsFav] = useState(null);
 
     useEffect(() => {
-        setProductIsFav(isFav);
-    }, [isFav]);
-    const isFavClass = productIsFav ? "text-red-500" : "text-gray-400";
-    const classAtts = `flex top-2 right-2 p-2 ${isFavClass} `;
+        if (productIsFav) {
+            setClassAttr("flex top-2 right-2 p-2 text-red-500");
+        } else {
+            setClassAttr("flex top-2 right-2 p-2 text-gray-400");
+        }
+        setProductIsFav(null);
+    }, [productIsFav, user]);
+
+    useEffect(() => {
+        if (isFav) {
+            setClassAttr("flex top-2 right-2 p-2 text-red-500");
+        } else {
+            setClassAttr("flex top-2 right-2 p-2 text-gray-400");
+        }
+    }, [isFav, user]);
 
     function addToWishlist() {
         if (userid) {
@@ -46,9 +57,9 @@ export default function AddToWishlistButton({
                 const result = await res.json();
 
                 if (result.result === "Added to wishlist!") {
-                    setProductIsFav(true);
+                    reloadSession();
                 } else {
-                    setProductIsFav(false);
+                    reloadSession();
                 }
                 setLoading(false);
             }
@@ -58,11 +69,16 @@ export default function AddToWishlistButton({
         }
     };
 
+    const reloadSession = () => {
+        const event = new Event("visibilitychange");
+        document.dispatchEvent(event);
+    };
+
     return (
         <div>
             {loading ? <Loader /> : null}
             <button
-                className={classAtts}
+                className={classAttr}
                 onClick={addToWishlist}>
                 <FavoriteIcon />
             </button>
