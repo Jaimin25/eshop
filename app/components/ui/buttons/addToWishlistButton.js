@@ -12,14 +12,17 @@ export default function AddToWishlistButton({
     productid,
 }) {
     const userid = user ? user.userid : null;
-    const [productIsFav, setProductIsFav] = useState(false);
+    const [productIsFav, setProductIsFav] = useState(null);
 
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setProductIsFav(isFav);
     }, [isFav]);
-    const isFavClass = productIsFav ? "text-red-500" : "text-gray-400";
+    console.log(productid, productIsFav, isFav);
+
+    const isFavClass =
+        productIsFav === isFav ? "text-red-500" : "text-gray-400";
     const classAtts = `flex top-2 right-2 p-2 ${isFavClass} `;
 
     function addToWishlist() {
