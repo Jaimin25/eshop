@@ -42,7 +42,7 @@ export default async function OrderDetailsPage(params) {
         }
     }
 
-    const date = new Date(order.createdAt);
+    const date = order ? new Date(order.createdAt) : null;
     return (
         <div className="mt-6 justify-center flex">
             {order !== null ? (

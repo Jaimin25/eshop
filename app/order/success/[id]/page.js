@@ -10,11 +10,12 @@ export default async function OrderSuccessPage(params) {
     const userid = session.user.userid.toString();
     async function getUserOrder() {
         const data = await fetch(
-            `${base_url}/api/account/user/order?userId=${userid}&secretKey=${encodeURIComponent(
+            `${base_url}/api/account/user/order?secretKey=${encodeURIComponent(
                 secretKey
             )}&orderId=${orderId}`
         );
         const res = await data.json();
+        console.log(res);
         return res.result;
     }
 
