@@ -30,14 +30,16 @@ export default async function OrderDetailsPage(params) {
 
     const order = await getUserOrder();
     const productDetails = [];
-    for (const index in order.products) {
-        productDetails.push(
-            await getProductDetails(
-                order.products[index].id,
-                order.products[index].quantity,
-                order.products[index].status
-            )
-        );
+    if (order !== null) {
+        for (const index in order.products) {
+            productDetails.push(
+                await getProductDetails(
+                    order.products[index].id,
+                    order.products[index].quantity,
+                    order.products[index].status
+                )
+            );
+        }
     }
 
     const date = new Date(order.createdAt);
