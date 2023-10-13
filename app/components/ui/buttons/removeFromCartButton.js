@@ -19,6 +19,7 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
                 userid: sessionUser.userid,
                 cartProductId: item._id,
                 secretKey: secretKey,
+                emptyCart: false,
             }),
         });
 
@@ -43,6 +44,7 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
         const event = new Event("visibilitychange");
         document.dispatchEvent(event);
     };
+
     return (
         <div>
             {loading ? <Loader /> : null}
