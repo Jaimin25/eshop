@@ -9,7 +9,6 @@ async function getProduct(id) {
 
 export default async function ProductDetail(res) {
     const param = res.searchParams.id;
-    const decodedProductTitle = decodeURIComponent(res.params.id);
 
     const productDetail = await getProduct(param);
     const imageList = productDetail.images;

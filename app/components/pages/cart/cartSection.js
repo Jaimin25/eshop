@@ -6,6 +6,7 @@ import EmptyCart from "./emptyCart";
 import { useSession } from "next-auth/react";
 import { base_url } from "@/app/lib/baseUrl";
 import Loader from "../../ui/loader";
+import PlaceOrderButton from "../../ui/buttons/placeOrderButton";
 
 export default function CartSection({ secretKey }) {
     const { data: session } = useSession();
@@ -66,10 +67,14 @@ export default function CartSection({ secretKey }) {
     };
 
     useEffect(() => {
-        const newFilteredCart = filteredCart.filter(
-            (item) => item._id !== itemRemoved
-        );
-        setFilteredCart(newFilteredCart);
+        if (itemRemoved !== "true") {
+            const newFilteredCart = filteredCart.filter(
+                (item) => item._id !== itemRemoved
+            );
+            setFilteredCart(newFilteredCart);
+        } else {
+            setFilteredCart({});
+        }
         if (itemRemoved !== "") {
             setLoading(false);
         }
@@ -97,6 +102,14 @@ export default function CartSection({ secretKey }) {
                             })}
                             ${sumTotal}
                         </p>
+                        <hr className="border-b my-2" />
+                        <PlaceOrderButton
+                            filteredCart={filteredCart}
+                            secretKey={secretKey}
+                            onItemRemove={setItemRemoved}
+                            orderTotal={sumTotal}
+                            setLoading={setLoading}
+                        />
                     </div>
                 </div>
             ) : !loading ? (
