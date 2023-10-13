@@ -11,12 +11,22 @@ export async function GET(req) {
 
     if (url_secret == secret) {
         const userId = new URL(req.url).searchParams.get("userId");
+
         await mongoose.connect(connectionSrv);
-        const data = await UserOrder.find({ userid: userId });
-        if (data) {
-            result = { result: { orders: data }, success: true };
-        } else {
-            result = { result: data, success: false };
+
+        if (userId === null) {
+            const orderId = new URL(req.url).searchParams.get("orderId");
+
+            if (mongoose.Types.ObjectId.isValid(orderId)) {
+                const data = await UserOrder.findById(orderId).exec();
+                if (data) {
+                    result = { result: data, success: true };
+                } else {
+                    result = { result: data, success: false };
+                }
+            } else {
+                result = { result: null, success: false };
+            }
         }
     } else {
         result = { result: "You don't have access!", success: false };
@@ -36,9 +46,15 @@ export async function POST(req) {
             products: products,
             status: status,
             orderTotal: orderTotal,
+            tax: 0,
+            shipping: 0,
         });
+
         if (data) {
-            result = { result: "Placed your successfully!", succes: true };
+            result = {
+                result: { msg: "Placed your successfully!", id: data._id },
+                succes: true,
+            };
         } else {
             result = {
                 result: "Problem placing your order",

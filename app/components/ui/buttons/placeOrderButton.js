@@ -2,6 +2,7 @@
 
 import { base_url } from "@/app/lib/baseUrl";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function PlaceOrderButton({
@@ -13,6 +14,8 @@ export default function PlaceOrderButton({
 }) {
     const { data: session } = useSession();
     const sessionUser = session ? session.user : null;
+
+    const router = useRouter();
 
     const placeOrderSubmit = async () => {
         const res = await fetch(`${base_url}/api/account/user/order`, {
@@ -35,12 +38,13 @@ export default function PlaceOrderButton({
             }),
         });
         const data = await res.json();
+
         if (data.ok) {
             setLoading(false);
         }
         setLoading(false);
 
-        if (data.result === "Placed your successfully!") {
+        if (data.result.msg === "Placed your successfully!") {
             setLoading(true);
 
             const res = await fetch(`${base_url}/api/account/user/cart`, {
@@ -57,14 +61,13 @@ export default function PlaceOrderButton({
 
             if (res.ok) {
                 setLoading(false);
-
                 reloadSession();
                 onItemRemove("true");
+                router.push(`/order/success/${data.result.id}`);
             }
 
             if (res.error) {
                 setLoading(false);
-
                 reloadSession();
             }
         }

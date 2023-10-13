@@ -12,6 +12,8 @@ const OrderModel = new mongoose.Schema(
         products: [ProductOrderModel],
         status: String,
         orderTotal: String,
+        tax: String,
+        shipping: String,
     },
     { timestamps: true }
 );
