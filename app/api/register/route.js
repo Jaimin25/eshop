@@ -3,6 +3,7 @@ import { User } from "@/app/lib/model/user";
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+
 export async function POST(req) {
     let result = {};
 

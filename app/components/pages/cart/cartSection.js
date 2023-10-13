@@ -67,10 +67,14 @@ export default function CartSection({ secretKey }) {
     };
 
     useEffect(() => {
-        const newFilteredCart = filteredCart.filter(
-            (item) => item._id !== itemRemoved
-        );
-        setFilteredCart(newFilteredCart);
+        if (itemRemoved !== "true") {
+            const newFilteredCart = filteredCart.filter(
+                (item) => item._id !== itemRemoved
+            );
+            setFilteredCart(newFilteredCart);
+        } else {
+            setFilteredCart({});
+        }
         if (itemRemoved !== "") {
             setLoading(false);
         }
@@ -103,6 +107,8 @@ export default function CartSection({ secretKey }) {
                             filteredCart={filteredCart}
                             secretKey={secretKey}
                             onItemRemove={setItemRemoved}
+                            orderTotal={sumTotal}
+                            setLoading={setLoading}
                         />
                     </div>
                 </div>

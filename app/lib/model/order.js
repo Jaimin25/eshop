@@ -17,4 +17,4 @@ const OrderModel = new mongoose.Schema(
 );
 
 export const UserOrder =
-    mongoose.models.userorders || mongoose.Model("userorders", OrderModel);
+    mongoose.models.userorders || mongoose.model("userorders", OrderModel);
