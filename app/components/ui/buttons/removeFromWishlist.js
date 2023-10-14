@@ -5,12 +5,15 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Loader from "../loader";
+import { Toast } from "../toast";
 
 export default function RemoveFromWishlist({ item, secretKey, onItemRemove }) {
     const { data: session } = useSession();
     const sessionUser = session ? session.user : null;
     const [loading, setLoading] = useState(false);
-    const submitRemoveFromCart = async () => {
+    const [wishlistUpdated, setWishlistUpdated] = useState(false);
+
+    const submitRemoveFromWishlist = async () => {
         const res = await fetch(`${base_url}/api/account/user/wishlist`, {
             method: "POST",
             headers: {
@@ -24,20 +27,22 @@ export default function RemoveFromWishlist({ item, secretKey, onItemRemove }) {
         });
 
         if (res.ok) {
-            reloadSession();
+            setWishlistUpdated(true);
             setLoading(false);
-            onItemRemove(item._id);
+            setTimeout(() => {
+                onItemRemove(item._id);
+            }, 300);
         }
 
         if (res.error) {
-            reloadSession();
             setLoading(false);
         }
     };
 
-    function removeFromCart() {
+    function removeFromWishlist() {
         setLoading(true);
-        submitRemoveFromCart();
+        setWishlistUpdated(false);
+        submitRemoveFromWishlist();
     }
 
     const reloadSession = () => {
@@ -47,9 +52,15 @@ export default function RemoveFromWishlist({ item, secretKey, onItemRemove }) {
     return (
         <div>
             {loading ? <Loader /> : null}
+            {wishlistUpdated ? (
+                <Toast
+                    msg={"Wishlist updated successfully!"}
+                    type="success"
+                />
+            ) : null}
             <div className="flex justify-start items-start text-start pt-4 px-2 ">
                 <div
-                    onClick={removeFromCart}
+                    onClick={removeFromWishlist}
                     className="hover:cursor-pointer text-red-400 hover:text-red-700">
                     <DeleteOutline />
                 </div>

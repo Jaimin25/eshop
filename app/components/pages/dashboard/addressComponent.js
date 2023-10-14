@@ -120,8 +120,11 @@ export default function AddressLayout({ secret }) {
     return (
         <div className="flex flex-col w-full p-2">
             {loading ? <Loader /> : null}
-            <p className="text-base font-bold p-2 text-[#262626]">Address</p>
-            <hr className="border-b-1 m-2" />
+            <p className="text-base font-bold p-2 text-[#262626]">
+                Your Address
+            </p>
+
+            <hr className="border-b border-[#e4e6eb]" />
             <p className="px-2 py-4 pb-1 text-sm">Address</p>
             <input
                 value={address}

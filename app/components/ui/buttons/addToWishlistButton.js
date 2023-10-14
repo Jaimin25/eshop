@@ -4,37 +4,31 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loader from "../loader";
+import { Toast } from "../toast";
 
 export default function AddToWishlistButton({
     isFav,
     user,
     secretKey,
     productid,
+    productList,
 }) {
     const userid = user ? user.userid : null;
     const [loading, setLoading] = useState(false);
-    const [classAttr, setClassAttr] = useState(null);
-    const [productIsFav, setProductIsFav] = useState(null);
+    const [productIsFav, setProductIsFav] = useState(isFav || false);
+    const [wishlistUpdated, setWishlistUpdated] = useState(false);
 
     useEffect(() => {
-        if (productIsFav) {
-            setClassAttr("flex top-2 right-2 p-2 text-red-500");
-        } else {
-            setClassAttr("flex top-2 right-2 p-2 text-gray-400");
-        }
-        setProductIsFav(null);
-    }, [productIsFav, user]);
+        setProductIsFav(isFav);
+    }, [isFav, productid]);
 
-    useEffect(() => {
-        if (isFav) {
-            setClassAttr("flex top-2 right-2 p-2 text-red-500");
-        } else {
-            setClassAttr("flex top-2 right-2 p-2 text-gray-400");
-        }
-    }, [isFav, user]);
+    const likedButtonClass = productIsFav
+        ? "flex top-2 right-2 p-2 text-red-500"
+        : "flex top-2 right-2 p-2 text-gray-400";
 
     function addToWishlist() {
         if (userid) {
+            setWishlistUpdated(false);
             setLoading(true);
             toggleProductToFav();
         }
@@ -57,9 +51,20 @@ export default function AddToWishlistButton({
                 const result = await res.json();
 
                 if (result.result === "Added to wishlist!") {
-                    reloadSession();
+                    setProductIsFav(true);
+
+                    productList.filter((item) => {
+                        if (item.id === productid)
+                            return (item.wishlist = true);
+                    });
+                    setWishlistUpdated(true);
                 } else {
-                    reloadSession();
+                    setProductIsFav(false);
+                    productList.filter((item) => {
+                        if (item.id === productid)
+                            return (item.wishlist = false);
+                    });
+                    setWishlistUpdated(true);
                 }
                 setLoading(false);
             }
@@ -77,8 +82,14 @@ export default function AddToWishlistButton({
     return (
         <div>
             {loading ? <Loader /> : null}
+            {wishlistUpdated ? (
+                <Toast
+                    msg={"Wishlist updated successfully!"}
+                    type="success"
+                />
+            ) : null}
             <button
-                className={classAttr}
+                className={likedButtonClass}
                 onClick={addToWishlist}>
                 <FavoriteIcon />
             </button>

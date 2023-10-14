@@ -15,7 +15,7 @@ export default async function OrderSuccessPage(params) {
             )}&orderId=${orderId}`
         );
         const res = await data.json();
-        console.log(res);
+
         return res.result;
     }
 
@@ -41,9 +41,11 @@ export default async function OrderSuccessPage(params) {
                         A confirmation email will be sent to you shortly.
                     </p>
                     <div className="flex justify-center gap-3 text-sm">
-                        <button className="border px-3 py-2">
-                            Manage Orders
-                        </button>
+                        <Link href="/dashboard/orders">
+                            <button className="border px-3 py-2">
+                                Manage Orders
+                            </button>
+                        </Link>
                         <Link href="/shop">
                             <button className="border px-3 py-2">
                                 Continue Shopping

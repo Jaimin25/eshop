@@ -88,8 +88,11 @@ export default async function OrderDetailsPage(params) {
                             </h1>
                             <hr className="border-b border-[#e4e6eb]" />
 
-                            {productDetails.map((item) => (
-                                <OrderProductCard item={item} />
+                            {productDetails.map((item, index) => (
+                                <OrderProductCard
+                                    item={item}
+                                    key={index}
+                                />
                             ))}
                         </div>
                         <div className="h-1/2 w-full lg:w-2/5 p-2 bg-white shadow">
