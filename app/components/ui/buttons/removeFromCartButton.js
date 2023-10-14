@@ -4,11 +4,14 @@ import { DeleteOutline } from "@mui/icons-material";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Loader from "../loader";
+import { Toast } from "../toast";
 
 export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
     const { data: session } = useSession();
     const sessionUser = session ? session.user : null;
     const [loading, setLoading] = useState(false);
+    const [cartUpdated, setCartUpdated] = useState(false);
+
     const submitRemoveFromCart = async () => {
         const res = await fetch(`${base_url}/api/account/user/cart`, {
             method: "DELETE",
@@ -24,9 +27,12 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
         });
 
         if (res.ok) {
-            reloadSession();
+            setCartUpdated(true);
             setLoading(false);
-            onItemRemove(item._id);
+            setTimeout(() => {
+                onItemRemove(item._id);
+                reloadSession();
+            }, 500);
         }
 
         if (res.error) {
@@ -36,6 +42,7 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
     };
 
     function removeFromCart() {
+        setCartUpdated(false);
         setLoading(true);
         submitRemoveFromCart();
     }
@@ -48,6 +55,12 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
     return (
         <div>
             {loading ? <Loader /> : null}
+            {cartUpdated ? (
+                <Toast
+                    msg={"Cart updated successfully!"}
+                    type={"success"}
+                />
+            ) : null}
             <div className="flex justify-start items-start text-start pt-4 px-2 ">
                 <div
                     onClick={removeFromCart}

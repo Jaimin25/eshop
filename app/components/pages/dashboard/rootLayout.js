@@ -12,7 +12,7 @@ export default function Layout({ children }) {
     const toggleOpen = () => setOpen((cur) => !cur);
 
     return (
-        <main className="flex flex-col lg:flex-row md:flex-row w-full justify-center mt-4 px-6">
+        <main className="flex flex-col lg:flex-row md:flex-row w-full justify-center mt-4 px-2 md:px-6 lg:px-6">
             <DashboardNavigationMobile />
 
             <div className="flex shadow w-full lg:w-4/5">

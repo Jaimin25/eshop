@@ -3,12 +3,15 @@
 import { base_url } from "@/app/lib/baseUrl";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { Toast } from "../toast";
 
 export default function AddToCartButton({ productDetail, secretKey }) {
     const { data: session } = useSession();
     const sessionUser = session ? session.user : null;
 
     const [quantity, setQuantity] = useState(1);
+
+    const [cartUpdated, setCartUpdated] = useState(false);
 
     const addToCartSubmit = async (e) => {
         const res = await fetch(`${base_url}/api/account/user/cart`, {
@@ -25,6 +28,7 @@ export default function AddToCartButton({ productDetail, secretKey }) {
         });
 
         if (res.ok) {
+            setCartUpdated(true);
             reloadSession();
         }
     };
@@ -34,10 +38,19 @@ export default function AddToCartButton({ productDetail, secretKey }) {
         document.dispatchEvent(event);
     };
     function addToCart() {
-        if (sessionUser) addToCartSubmit();
+        if (sessionUser) {
+            setCartUpdated(false);
+            addToCartSubmit();
+        }
     }
     return (
         <>
+            {cartUpdated ? (
+                <Toast
+                    msg={"Cart updated successfully!"}
+                    type={"success"}
+                />
+            ) : null}
             <input
                 type="number"
                 value={quantity}
