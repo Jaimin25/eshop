@@ -58,6 +58,7 @@ export default function ProductsSection({
                                     key={index}
                                     secretKey={secretKey}
                                     user={user}
+                                    productList={filteredProducts}
                                 />
                             ))}
                     </div>
