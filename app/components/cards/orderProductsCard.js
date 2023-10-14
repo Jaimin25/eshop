@@ -22,10 +22,16 @@ export default function OrderProductCard({ item }) {
                 <div className="flex flex-col w-full p-2">
                     <div className="flex p-4 text-sm  w-full">
                         <div className="flex w-full gap-4 flex-col lg:flex-row md:flex-row">
-                            <div className="flex-1 mx-1">
-                                <p className="font-medium text-base">
-                                    {item.title}
-                                </p>
+                            <div className="flex-1 mx-1 ">
+                                <Link
+                                    href={{
+                                        pathname: `/product/${item.title}`,
+                                        query: { id: item.id },
+                                    }}>
+                                    <p className="font-medium text-base text-blue-500 cursor-pointer hover:underline hover:transition">
+                                        {item.title}
+                                    </p>
+                                </Link>
                                 <p className=" flex-1 text-sm">${item.price}</p>
                             </div>
                             <div className="text-center mx-1 gap-2 flex flex-row lg:flex-col md:flex-col">
