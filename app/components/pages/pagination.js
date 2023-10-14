@@ -49,7 +49,7 @@ export default function ProductsSection({
 
             {filteredProducts.length > 0 ? (
                 <div className="flex flex-1 flex-col justify-center items-center">
-                    <div className="p-1 w-full h-full grid grid-flow-row-dense grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                    <div className="p-1 w-full h-full grid grid-flow-row-dense grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
                         {filteredProducts
                             .slice(startIndex, endIndex)
                             .map((item, index) => (

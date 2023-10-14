@@ -121,8 +121,11 @@ export default function AccountDetails({ secret }) {
                 />
             ) : null}
 
-            <p className="text-base font-semibold p-2">Account Details</p>
-            <hr className="border-b-1 m-2" />
+            <p className="text-base font-bold p-2 text-[#262626]">
+                Account Details
+            </p>
+
+            <hr className="border-b border-[#e4e6eb]" />
             <p className="p-2 text-sm text-[#323232] mt-1">
                 Logged in with {userData ? userData.provider : null}
             </p>
