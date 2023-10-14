@@ -56,7 +56,7 @@ export default function OrderListComponent({ secretKey, ordersList }) {
                 </div>
             ) : (
                 <div className="w-full flex justify-center">
-                    You have no orders yet.
+                    <p className="p-2">You have no orders yet.</p>
                 </div>
             )}
         </div>

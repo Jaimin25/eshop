@@ -71,3 +71,25 @@ export async function POST(req) {
     }
     return NextResponse.json(result);
 }
+
+export async function DELETE(req) {
+    const { userid, orderid, secretKey } = await req.json();
+    const secretCheck = process.env.protection_secret;
+    let result = {};
+    if (secretCheck === secretKey) {
+        await mongoose.connect(connectionSrv);
+        const data = await UserOrder.deleteOne({
+            _id: orderid,
+            userid: userid,
+        });
+        if (data.acknowledged === true) {
+            result = { result: "Order cancelled!", success: true };
+        } else {
+            result = { result: "Error cancelling order", success: false };
+        }
+    } else {
+        result = { result: "You don't have access!", success: false };
+    }
+
+    return NextResponse.json(result);
+}

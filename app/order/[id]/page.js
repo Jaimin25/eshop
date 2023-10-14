@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import OrderProductCard from "@/app/components/cards/orderProductsCard";
+import CancelOrderButton from "@/app/components/ui/buttons/cancelOrderButton";
 import { base_url } from "@/app/lib/baseUrl";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
@@ -47,7 +48,7 @@ export default async function OrderDetailsPage(params) {
         <div className="mt-6 justify-center flex">
             {order !== null ? (
                 <div className="flex flex-col w-full lg:w-10/12 md:w-10/12 self-center p-1 m-2">
-                    <div className="w-full bg-white shadow px-3 mb-3">
+                    <div className="w-full bg-white shadow px-3 mb-4">
                         <h1 className="text-lg font-bold my-3">
                             Order Details
                         </h1>
@@ -74,15 +75,17 @@ export default async function OrderDetailsPage(params) {
                                 </div>
                             </div>
 
-                            <div className="w-2/5 flex justify-end py-2">
-                                <button className="border border-[#e4e6eb] text-sm px-3 py-1">
-                                    Cancel Order
-                                </button>
+                            <div className="lg:w-2/5 md:w-2/5 w-full flex justify-end py-2">
+                                <CancelOrderButton
+                                    order={order}
+                                    userid={userid}
+                                    secretKey={secretKey}
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="flex flex-col lg:flex-row">
-                        <div className="w-full lg:w-5/6 lg:mr-4 pt-2 px-3 bg-white shadow">
+                        <div className="w-full lg:w-5/6 lg:mr-4 pt-2 mb-4 px-3 bg-white shadow">
                             <h1 className="text-lg font-bold my-3">
                                 Order Items
                             </h1>

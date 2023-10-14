@@ -8,7 +8,7 @@ export function Toast({ msg, type }) {
     );
     setTimeout(() => {
         setVisible("hidden");
-    }, 500);
+    }, 750);
     return (
         <div className={`${visible}`}>
             <div
