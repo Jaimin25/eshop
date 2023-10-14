@@ -15,7 +15,7 @@ export default async function OrderSuccessPage(params) {
             )}&orderId=${orderId}`
         );
         const res = await data.json();
-        console.log(res);
+
         return res.result;
     }
 

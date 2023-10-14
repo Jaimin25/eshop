@@ -27,6 +27,13 @@ export async function GET(req) {
             } else {
                 result = { result: null, success: false };
             }
+        } else {
+            const data = await UserOrder.find({ userid: userId }).exec();
+            if (data) {
+                result = { result: data, success: true };
+            } else {
+                result = { result: data, success: false };
+            }
         }
     } else {
         result = { result: "You don't have access!", success: false };
