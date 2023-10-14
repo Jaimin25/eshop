@@ -75,7 +75,7 @@ export default function WishlistComponent({ secret }) {
     }, [itemRemoved]);
 
     return (
-        <div className="w-full pt-2 px-2 flex flex-col justify-center">
+        <div className="w-full pt-2 px-2 flex flex-col">
             {loading ? <Loader /> : null}
             <p className="text-base font-bold p-2 text-[#262626]">
                 Your Wishlist
