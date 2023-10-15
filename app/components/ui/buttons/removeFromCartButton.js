@@ -32,7 +32,7 @@ export default function RemoveFromCart({ item, secretKey, onItemRemove }) {
             setTimeout(() => {
                 onItemRemove(item._id);
                 reloadSession();
-            }, 400);
+            }, 300);
         }
 
         if (res.error) {

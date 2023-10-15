@@ -18,7 +18,7 @@ export default async function OrderListPage() {
         return res.result;
     }
     const ordersList = await getUserOrder();
-    console.log(ordersList);
+
     return (
         <OrderListComponent
             secretKey={secretKey}

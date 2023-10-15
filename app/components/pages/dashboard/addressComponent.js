@@ -4,6 +4,7 @@ import { base_url } from "@/app/lib/baseUrl";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loader from "../../ui/loader";
+import { Toast } from "../../ui/toast";
 
 export default function AddressLayout({ secret }) {
     const [id, setId] = useState("");
@@ -18,6 +19,7 @@ export default function AddressLayout({ secret }) {
     const sessionUser = session ? session.user : null;
 
     const [loading, setLoading] = useState(true);
+    const [addressUpdated, setAddressUpdated] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -102,6 +104,7 @@ export default function AddressLayout({ secret }) {
 
             if (res.ok) {
                 setLoading(false);
+                setAddressUpdated(true);
             }
 
             if (res.error) {
@@ -115,11 +118,18 @@ export default function AddressLayout({ secret }) {
 
     function changeAddressDetails() {
         setLoading(true);
+        setAddressUpdated(false);
         handleSubmit();
     }
     return (
         <div className="flex flex-col w-full p-2">
             {loading ? <Loader /> : null}
+            {addressUpdated ? (
+                <Toast
+                    msg={"Address updated successfully!"}
+                    type={"success"}
+                />
+            ) : null}
             <p className="text-base font-bold p-2 text-[#262626]">
                 Your Address
             </p>

@@ -15,11 +15,9 @@ export default function AccountDetails({ secret }) {
     const sessionUser = session ? session.user : null;
 
     const [loading, setLoading] = useState(false);
+    const [accountDetailsUpdated, setAccountDetailsUpdated] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-
-    const [response, setResponse] = useState(null);
-    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
         setLoading(true);
@@ -80,11 +78,11 @@ export default function AccountDetails({ secret }) {
                 }),
             });
             if (res.ok) {
-                const result = await res.json();
-                setResponse(result.result);
-                setSuccess(true);
-                reloadSession();
                 setLoading(false);
+                setAccountDetailsUpdated(true);
+                setTimeout(() => {
+                    reloadSession();
+                }, 250);
             }
 
             if (res.error) {
@@ -104,6 +102,7 @@ export default function AccountDetails({ secret }) {
 
     function saveChanges() {
         setLoading(true);
+        setAccountDetailsUpdated(false);
         handleSubmit();
     }
 
@@ -114,10 +113,10 @@ export default function AccountDetails({ secret }) {
                     <Loader />
                 </div>
             ) : null}
-            {response ? (
+            {accountDetailsUpdated ? (
                 <Toast
-                    msg={response}
-                    type={success}
+                    msg={"Details updated successfully!"}
+                    type={"success"}
                 />
             ) : null}
 
