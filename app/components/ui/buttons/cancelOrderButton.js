@@ -36,9 +36,7 @@ export default function CancelOrderButton({ order, userid, secretKey }) {
             const data = await res.json();
 
             if (data.result === "Order cancelled!") {
-                router.push("/dashboard/orders").then(() => {
-                    window.location.reload();
-                });
+                router.push("/dashboard/orders");
             }
         }
 
