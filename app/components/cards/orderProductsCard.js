@@ -53,11 +53,6 @@ export default function OrderProductCard({ item }) {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-end">
-                        <button className="border border-[#e4e6eb] px-3 py-1 text-sm">
-                            Cancel
-                        </button>
-                    </div>
                 </div>
             </div>
         </>

@@ -31,7 +31,7 @@ export default function RemoveFromWishlist({ item, secretKey, onItemRemove }) {
             setLoading(false);
             setTimeout(() => {
                 onItemRemove(item._id);
-            }, 400);
+            }, 300);
         }
 
         if (res.error) {
