@@ -17,6 +17,7 @@ export default function AddToWishlistButton({
     const [loading, setLoading] = useState(false);
     const [productIsFav, setProductIsFav] = useState(isFav || false);
     const [wishlistUpdated, setWishlistUpdated] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setProductIsFav(isFav);
@@ -27,10 +28,14 @@ export default function AddToWishlistButton({
         : "flex top-2 right-2 p-2 text-gray-400";
 
     function addToWishlist() {
+        setError(null);
+
         if (userid) {
             setWishlistUpdated(false);
             setLoading(true);
             toggleProductToFav();
+        } else {
+            setError("Not authenticated!");
         }
     }
 
@@ -86,6 +91,12 @@ export default function AddToWishlistButton({
                 <Toast
                     msg={"Wishlist updated successfully!"}
                     type="success"
+                />
+            ) : null}
+            {error ? (
+                <Toast
+                    msg={error}
+                    type={"error"}
                 />
             ) : null}
             <button
