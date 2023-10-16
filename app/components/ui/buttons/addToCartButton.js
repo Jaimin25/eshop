@@ -43,9 +43,10 @@ export default function AddToCartButton({ productDetail, secretKey }) {
             setCartUpdated(false);
             addToCartSubmit();
         } else {
+            setError(null);
+
             setError("Not authenticated!");
         }
-        setError(null);
     }
     return (
         <>
