@@ -39,13 +39,13 @@ export default function AddToCartButton({ productDetail, secretKey }) {
         document.dispatchEvent(event);
     };
     function addToCart() {
-        setError(null);
         if (sessionUser) {
             setCartUpdated(false);
             addToCartSubmit();
         } else {
             setError("Not authenticated!");
         }
+        setError(null);
     }
     return (
         <>
