@@ -17,7 +17,6 @@ export default function AddToWishlistButton({
     const [loading, setLoading] = useState(false);
     const [productIsFav, setProductIsFav] = useState(isFav || false);
     const [wishlistUpdated, setWishlistUpdated] = useState(false);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         setProductIsFav(isFav);
@@ -32,10 +31,6 @@ export default function AddToWishlistButton({
             setWishlistUpdated(false);
             setLoading(true);
             toggleProductToFav();
-        } else {
-            setError(null);
-
-            setError("Not authenticated!");
         }
     }
 
@@ -93,15 +88,10 @@ export default function AddToWishlistButton({
                     type="success"
                 />
             ) : null}
-            {error ? (
-                <Toast
-                    msg={error}
-                    type={"error"}
-                />
-            ) : null}
             <button
                 className={likedButtonClass}
-                onClick={addToWishlist}>
+                onClick={addToWishlist}
+                disabled={userid ? false : true}>
                 <FavoriteIcon />
             </button>
         </div>
