@@ -53,9 +53,9 @@ export async function POST(req) {
             });
 
             if (data) {
-                result = { result: "Submitted review!", succes: true };
+                result = { result: "Review submitted!", succes: true };
             } else {
-                result = { result: "Problem adding to cart", success: false };
+                result = { result: "Problem adding review!", success: false };
             }
         }
     } else {
