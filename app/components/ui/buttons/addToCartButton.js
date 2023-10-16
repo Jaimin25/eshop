@@ -12,6 +12,7 @@ export default function AddToCartButton({ productDetail, secretKey }) {
     const [quantity, setQuantity] = useState(1);
 
     const [cartUpdated, setCartUpdated] = useState(false);
+    const [error, setError] = useState(null);
 
     const addToCartSubmit = async (e) => {
         const res = await fetch(`${base_url}/api/account/user/cart`, {
@@ -38,9 +39,12 @@ export default function AddToCartButton({ productDetail, secretKey }) {
         document.dispatchEvent(event);
     };
     function addToCart() {
+        setError(null);
         if (sessionUser) {
             setCartUpdated(false);
             addToCartSubmit();
+        } else {
+            setError("Not authenticated!");
         }
     }
     return (
@@ -49,6 +53,12 @@ export default function AddToCartButton({ productDetail, secretKey }) {
                 <Toast
                     msg={"Cart updated successfully!"}
                     type={"success"}
+                />
+            ) : null}
+            {error ? (
+                <Toast
+                    msg={error}
+                    type={"error"}
                 />
             ) : null}
             <input

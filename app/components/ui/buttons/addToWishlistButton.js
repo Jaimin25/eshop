@@ -28,7 +28,7 @@ export default function AddToWishlistButton({
         : "flex top-2 right-2 p-2 text-gray-400";
 
     function addToWishlist() {
-        setError(false);
+        setError(null);
 
         if (userid) {
             setWishlistUpdated(false);
