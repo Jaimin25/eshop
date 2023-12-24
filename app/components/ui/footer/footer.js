@@ -41,7 +41,7 @@ export default function Footer() {
                         type="email"
                         placeholder="Please Enter Your Email"
                         className="h-[45px] focus:text-[#000] focus:outline-none border border-[#e4e6eb] p-2 mx-1 text-sm cursor-text"
-                        required></input>
+                        required />
                     <button className="hover:bg-[#2962ff] outline-none transition py-[10px] px-[16px] min-w-[135px] mx-1 mt-[10px] text-[#323232] text-[13px] font-medium hover:text-white border rounded-sm">
                         Subscribe
                     </button>

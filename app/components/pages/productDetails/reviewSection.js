@@ -85,7 +85,7 @@ export default function Review({ secretKey, productid }) {
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                     className=" w-full resize-y text-sm px-[10px] py-[8px] border rounded-sm cursor-text outline-none"
-                    required></textarea>
+                    required />
                 <p className="p-1 mt-2">Rating</p>
 
                 <Rating
