@@ -9,7 +9,7 @@ export default function Ratings({ rating }) {
             <div className="flex gap-2 my-2 items-center text-[#323232]">
                 <Rating
                     value={5}
-                    readonly={true}
+                    readonly
                 />
                 <p className="text-sm">based on {3} reviews</p>
             </div>
