@@ -56,7 +56,7 @@ export default function AddToCartButton({ productDetail, secretKey }) {
                 type="number"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
-                className="p-2 ml-5 border rounded-sm w-3/4 outline-none"></input>
+                className="p-2 ml-5 border rounded-sm w-3/4 outline-none" />
             <div className="flex m-4 justify-center">
                 <button
                     className="text-sm flex justify-center items-center shadow p-2"

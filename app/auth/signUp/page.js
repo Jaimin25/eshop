@@ -24,9 +24,9 @@ export default function SignUpPage() {
             <div className="flex flex-col lg:flex-row md:flex-row mx-6 w-full justify-center">
                 <SignUpForm />
                 <div className="divider flex lg:flex-col md:flex-col bg-white justify-center items-center px-8 lg:px-4 md:px-4 py-6">
-                    <div className="lg:border-r-2 md:border-r-2 border-b-2 flex-1"></div>
+                    <div className="lg:border-r-2 md:border-r-2 border-b-2 flex-1" />
                     <p className="my-2 mx-3 text-sm font-medium">Or</p>
-                    <div className="lg:border-r-2 md:border-r-2 border-b-2 flex-1"></div>
+                    <div className="lg:border-r-2 md:border-r-2 border-b-2 flex-1" />
                 </div>
                 <SocialSignIn />
             </div>
