@@ -23,7 +23,7 @@ export default function LoginForm() {
 
             if (user.result === null) {
                 setLoading(false);
-                setError(`No account found with that email!`);
+                setError("No account found with that email!");
                 return;
             }
 

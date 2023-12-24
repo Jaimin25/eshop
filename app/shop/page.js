@@ -3,7 +3,7 @@ import ShopPage from "../components/pages/shop";
 import { getServerSession } from "next-auth";
 
 async function getProducts() {
-    const url = `https://dummyjson.com/products?limit=0`;
+    const url = "https://dummyjson.com/products?limit=0";
 
     const data = await fetch(url);
     const products = await data.json();
